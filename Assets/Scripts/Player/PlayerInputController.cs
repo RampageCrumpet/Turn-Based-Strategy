@@ -13,7 +13,12 @@ public class PlayerInputController : MonoBehaviour
     GameBoard gameBoard;
 
     [SerializeField]
+    [Tooltip("The UnitMenu class we want to get Input from.")]
     UnitMenu unitMenu;
+
+    [SerializeField]
+    [Tooltip("The GameMenu class we want to get Input from.")]
+    GameMenu gameMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +29,8 @@ public class PlayerInputController : MonoBehaviour
         //Hook the UnitMenu buttons up to functions
         unitMenu.InitializeButtons(UnitMenuAttack, UnitMenuWait,
              UnitMenuCancel, UnitMenuSpecial);
+
+        gameMenu.InitializeButtons(GameMenuEndTurn, GameMenuCancel);
 
     }
 
@@ -43,17 +50,21 @@ public class PlayerInputController : MonoBehaviour
                 {
                     //Select the unit in that tile
                     player.SelectUnit(tilePosition);
+
+
+                    if (player.SelectedUnit != null)
+                    {
+                        //We selected something.
+                        menuState = MenuState.selected;
+                    }
+                    else
+                    {
+                        menuState = MenuState.gameMenu;
+                        gameMenu.ShowGameMenu(Input.mousePosition);
+                    }
                 }
 
-                if(player.SelectedUnit != null)
-                {
-                    //We selected something.
-                    menuState = MenuState.selected;
-                }
-                else
-                {
-                    //TODO: If we clicked an empty tile we want to display the GameMenu and enter the gameMenu state.
-                }
+
                 break;
 
 
@@ -110,7 +121,7 @@ public class PlayerInputController : MonoBehaviour
             case MenuState.gameMenu:
                 if (Input.GetMouseButtonDown(1))
                 {
-                    menuState = MenuState.unselected;
+                    GameMenuCancel();
                 }
                 break;
         }
@@ -142,5 +153,16 @@ public class PlayerInputController : MonoBehaviour
         unitMenu.HideUnitMenu();
     }
 
+
+    private void GameMenuCancel()
+    {
+        gameMenu.HideGameMenu();
+        menuState = MenuState.unselected;
+    }
+
+    private void GameMenuEndTurn()
+    {
+        player.EndTurn();
+    }
 }
 

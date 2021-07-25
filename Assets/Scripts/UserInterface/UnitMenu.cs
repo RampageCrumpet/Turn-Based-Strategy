@@ -42,10 +42,10 @@ public class UnitMenu : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public void ShowUnitMenu(Vector2 mousePosition, bool showAttack)
+    public void ShowUnitMenu(Vector2 displayPosition, bool showAttack)
     {
         //Move the Unit Menu to the mouse position.
-        panel.position = mousePosition;
+        panel.position = displayPosition;
 
         this.gameObject.SetActive(true);
         attackButton.gameObject.SetActive(showAttack);

@@ -17,21 +17,22 @@ public class GameController : MonoBehaviour
 
     List<Player> players = new List<Player>();
 
+    public Player ActivePlayer { get; private set; }
 
-    
-   
-
-
-    void Awake()
+    private void Start()
     {
         //Enforce the singleton pattern
-        if(gameController != null) {
+        if (gameController != null)
+        {
             Debug.LogError("Multiple GameControllers detected in the scene.");
-            Destroy(this); 
+            Destroy(this);
         }
-        else {
-            gameController = this; 
+        else
+        {
+            gameController = this;
         }
+        //Set the active Player to the first player.
+        ActivePlayer = players[0];
     }
 
     public void AddUnitToGameBoard(Unit unit, Vector2Int position)
