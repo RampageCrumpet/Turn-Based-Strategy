@@ -45,7 +45,7 @@ public class PlayerInputController : MonoBehaviour
                     player.SelectUnit(tilePosition);
                 }
 
-                if(player.GetSelectedUnit() != null)
+                if(player.SelectedUnit != null)
                 {
                     //We selected something.
                     menuState = MenuState.selected;

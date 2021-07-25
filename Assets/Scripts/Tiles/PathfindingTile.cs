@@ -7,6 +7,9 @@ using Pathfinding;
 
 public class PathfindingTile 
 {
+
+
+
     //The cost for a walking unit to cross this tile.
     int legCost = 1;
 

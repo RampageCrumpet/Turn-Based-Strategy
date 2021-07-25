@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Unit selectedUnit = null;
+    public Unit SelectedUnit { get; private set; }
 
     [SerializeField]
     [Tooltip("The players starting cash.")]
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
 
         if (gameBoard.Contains(position))
         {
-            selectedUnit = gameBoard.GetTile(position).unit;
+            SelectedUnit = gameBoard.GetTile(position).unit;
         }
         else
         {
@@ -39,25 +39,20 @@ public class Player : MonoBehaviour
 
 
         //DEBUG STUFF:
-        if (selectedUnit == null)
+        if (SelectedUnit == null)
             Debug.Log("Selected NULL");
         else
-            Debug.Log("Selected Unit:" + selectedUnit.name);
+            Debug.Log("Selected Unit:" + SelectedUnit.name);
 
         return false;
     }
 
 
-    public Unit GetSelectedUnit() {  return selectedUnit; }
-
-    public void DeselectUnit()
-    {
-        selectedUnit = null;
-    }
+    public void DeselectUnit() => SelectedUnit = null;
 
     public void IssueMoveOrder(Vector2Int position)
     {
-        selectedUnit.Move(position);
+        SelectedUnit.Move(position);
     }
 
     public void EndTurn()
