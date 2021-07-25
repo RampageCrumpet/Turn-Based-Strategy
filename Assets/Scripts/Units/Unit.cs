@@ -56,11 +56,9 @@ public class Unit : MonoBehaviour
     //The remaining hitpoints on the unit.
     int hitPoints= 10;
 
-    bool canMove = false;
+    //A flag used to see if a unit has exhausted itself yet.
+    public bool CanMove { get;  set;} = false;
 
-    //The tilemap position of this unit. 
-    //The Tilemap position of the unit is to be trusted over the actual position of the unit.
-    public Vector2Int position;
 
 
 
@@ -70,7 +68,7 @@ public class Unit : MonoBehaviour
         pathFollower = this.GetComponent<PathFollower>();
 
         //Set the starting position of the unit on the gameBoard.
-        position = GameController.gameController.gameBoard.WorldToCell(this.transform.position);
+        Vector2Int position = GameController.gameController.gameBoard.WorldToCell(this.transform.position);
 
         GameController.gameController.AddUnitToGameBoard(this, position);
     }

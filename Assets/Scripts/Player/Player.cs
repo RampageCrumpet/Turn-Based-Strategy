@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     [Tooltip("The units the player owns.")]
-    List<Unit> units = new List<Unit>();
+    List<Unit> playerUnits = new List<Unit>();
 
 
     private void IssueCommand()
@@ -57,6 +57,12 @@ public class Player : MonoBehaviour
 
     public void EndTurn()
     {
+        //Allow each unit to move again next turn.
+        foreach(Unit unit in playerUnits)
+        {
+            unit.CanMove = true;
+        }
+
         GameController.gameController.EndTurn(this);
     }
 }

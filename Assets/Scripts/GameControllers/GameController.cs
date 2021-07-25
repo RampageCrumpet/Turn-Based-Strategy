@@ -17,7 +17,10 @@ public class GameController : MonoBehaviour
 
     List<Player> players = new List<Player>();
 
-    public Player ActivePlayer { get; private set; }
+    public int DayCount { get; private set; } = 0;
+
+    public Player ActivePlayer { get { return activePlayer.Current; } private set { } }
+    IEnumerator<Player> activePlayer;
 
     private void Start()
     {
@@ -55,7 +58,12 @@ public class GameController : MonoBehaviour
 
     public void EndTurn(Player player)
     {
-
+        //MoveNext returns false when it's moved past the end of the list
+        if(!activePlayer.MoveNext())
+        {
+            DayCount++;
+            activePlayer.Reset();
+        }
     }
 
 
