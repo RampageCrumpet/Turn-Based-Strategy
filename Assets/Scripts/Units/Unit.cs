@@ -73,17 +73,19 @@ public class Unit : MonoBehaviour
         GameController.gameController.AddUnitToGameBoard(this, position);
     }
 
-    public void Move(Vector2Int targetPosition)
+    public bool Move(Vector2Int targetPosition)
     {
-        
-
         Vector2Int startPosition = GameController.gameController.gameBoard.WorldToCell(this.transform.position);
         Stack <Vector2Int> path = GameController.gameController.pathfinder.FindPath(startPosition, targetPosition, movementType);
+
+        if (GameController.gameController.pathfinder.GetPathCost(path, movementType) > movement)
+            return false;
 
         //Trigger observers to watch for this unit moving. OnMove should never be null.
         OnMove(this, startPosition, targetPosition);
 
         pathFollower.FollowPath(path);
+        return true;
     }
 
     public void Attack(Unit target)
