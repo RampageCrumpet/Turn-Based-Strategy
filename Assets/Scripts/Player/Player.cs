@@ -16,12 +16,6 @@ public class Player : MonoBehaviour
     List<Unit> playerUnits = new List<Unit>();
 
 
-    private void IssueCommand()
-    {
-
-    }
-
-
 
     public bool SelectUnit(Vector2Int position)
     {

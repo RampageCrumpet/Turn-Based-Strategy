@@ -4,14 +4,16 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Pathfinding;
 
-
+[RequireComponent(typeof(RangeFinder))]
 [RequireComponent(typeof(AStar))]
 public class GameController : MonoBehaviour
 {
-    //Control scripts
+    //Control scripts. Currently public, should probbably be made private and fetched from the GameController. 
     public AStar pathfinder;
     public static GameController gameController;
     public GameBoard gameBoard;
+    public RangeFinder rangeFinder;
+
 
 
 
@@ -19,8 +21,8 @@ public class GameController : MonoBehaviour
 
     public int DayCount { get; private set; } = 0;
 
-    public Player ActivePlayer { get { return activePlayer.Current; } private set { } }
-    IEnumerator<Player> activePlayer;
+    public Player ActivePlayer { get { return players[activePlayerIndex]; } private set { } }
+    int activePlayerIndex = 0;
 
     private void Start()
     {
@@ -34,8 +36,9 @@ public class GameController : MonoBehaviour
         {
             gameController = this;
         }
-        //Set the active Player to the first player.
-        ActivePlayer = players[0];
+
+        pathfinder = this.gameObject.GetComponent<AStar>();
+        rangeFinder = this.gameObject.GetComponent<RangeFinder>();
     }
 
     public void AddUnitToGameBoard(Unit unit, Vector2Int position)
@@ -57,12 +60,15 @@ public class GameController : MonoBehaviour
     }
 
     public void EndTurn(Player player)
-    {
-        //MoveNext returns false when it's moved past the end of the list
-        if(!activePlayer.MoveNext())
+    { 
+        if(player == players[activePlayerIndex])
         {
-            DayCount++;
-            activePlayer.Reset();
+            activePlayerIndex++;
+            if (activePlayerIndex >= players.Count)
+            {
+                activePlayerIndex = 0;
+                DayCount++;
+            }
         }
     }
 

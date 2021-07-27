@@ -228,5 +228,24 @@ namespace Pathfinding
             return null;
         }
 
+        //Extract the cost to move through a path.
+        public int GetPathCost(Stack<Vector2Int> pathStack, MovementType movementType)
+        {
+            if (path == null)
+                return 0;
+
+            int pathCost = 0;
+
+            foreach (Vector2Int tilePosition in path)
+            {
+                pathCost += GetTileCost(tilePosition, movementType);
+            }
+
+            return pathCost;
+        }
+
     }
+
+
+
 }
