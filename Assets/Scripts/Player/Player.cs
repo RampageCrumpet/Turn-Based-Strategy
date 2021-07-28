@@ -46,7 +46,6 @@ public class Player : MonoBehaviour
 
     public void IssueMoveOrder(Vector2Int position)
     {
-
         SelectedUnit.Move(position);
     }
 

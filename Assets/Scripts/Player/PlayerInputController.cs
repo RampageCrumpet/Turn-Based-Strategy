@@ -20,6 +20,11 @@ public class PlayerInputController : MonoBehaviour
     [Tooltip("The GameMenu class we want to get Input from.")]
     GameMenu gameMenu;
 
+    [Header("Tile Indicator Sprites")]
+    [SerializeField]
+    [Tooltip("The sprite to be displayed on tiles the player can move to.")]
+    Sprite moveIndicatorSprite;
+
     // Start is called before the first frame update
     void Start()
     {
