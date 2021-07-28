@@ -14,11 +14,11 @@ public class PlayerInputController : MonoBehaviour
 
     [SerializeField]
     [Tooltip("The UnitMenu class we want to get Input from.")]
-    UnitMenu unitMenu;
+    public UnitMenu unitMenu;
 
     [SerializeField]
     [Tooltip("The GameMenu class we want to get Input from.")]
-    GameMenu gameMenu;
+    public GameMenu gameMenu;
 
     [Header("Tile Indicator Sprites")]
     [SerializeField]

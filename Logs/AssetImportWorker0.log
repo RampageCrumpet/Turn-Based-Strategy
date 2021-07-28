@@ -806,3 +806,403 @@ Received Import Request.
   path: Assets/Scripts/StateMachine/PlayerInputStateMachine
   artifactKey: Guid(2cb6ba4766a88a444a9995344c904877) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine using Guid(2cb6ba4766a88a444a9995344c904877) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb7d73b5b545d656ab12aaee677c96f5') in 0.007174 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 73.072043 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnselected.cs
+  artifactKey: Guid(dd850983b7205474f8e3591409f3cc0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnselected.cs using Guid(dd850983b7205474f8e3591409f3cc0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd29d5dfaa884c16096a9a3c5c62ef379') in 0.006909 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005102 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\Alex Van Oss\Documents\GitHub\CSC-Winter-2020\Turn Based Strategy\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\Alex Van Oss\Documents\GitHub\CSC-Winter-2020\Turn Based Strategy\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.89 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.926 seconds
+Domain Reload Profiling:
+	ReloadAssembly (926ms)
+		BeginReloadAssembly (100ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (6ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (38ms)
+		EndReloadAssembly (775ms)
+			LoadAssemblies (77ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (303ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (42ms)
+			SetupLoadedEditorAssemblies (258ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (57ms)
+				ProcessInitializeOnLoadAttributes (186ms)
+				ProcessInitializeOnLoadMethodAttributes (7ms)
+				AfterProcessingInitializeOnLoad (2ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (9ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.82 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3664 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 141.7 MB.
+System memory in use after: 141.8 MB.
+
+Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 4156.
+Total: 3.094300 ms (FindLiveObjects: 0.377900 ms CreateObjectMapping: 0.107800 ms MarkObjects: 2.440100 ms  DeleteObjects: 0.167100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1521.468593 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnselected.cs
+  artifactKey: Guid(dd850983b7205474f8e3591409f3cc0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnselected.cs using Guid(dd850983b7205474f8e3591409f3cc0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1c2f69f391fe324b75e40b880660815') in 0.008601 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 28.389181 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputSelected.cs
+  artifactKey: Guid(afe5a737375023a49897551fc77d194f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputSelected.cs using Guid(afe5a737375023a49897551fc77d194f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18d677ac5f81e8e5b3126ae177d34522') in 0.007550 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 116.530760 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnselected.cs
+  artifactKey: Guid(dd850983b7205474f8e3591409f3cc0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnselected.cs using Guid(dd850983b7205474f8e3591409f3cc0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '642aa318ba18d7bdd4b190312ccd36a1') in 0.002395 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.839354 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnselected.cs
+  artifactKey: Guid(dd850983b7205474f8e3591409f3cc0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnselected.cs using Guid(dd850983b7205474f8e3591409f3cc0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83a764ad4579ac8b2215b7fe7e152c0b') in 0.002298 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.961936 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnselected.cs
+  artifactKey: Guid(dd850983b7205474f8e3591409f3cc0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnselected.cs using Guid(dd850983b7205474f8e3591409f3cc0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e9badc13fed4faf204ecfa081211c6a') in 0.003989 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 316.101666 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '644d4299e2a40b2fe232d736db0c6949') in 0.007866 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 119.550002 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c3a1879822c3ca096765973ce6b7eb4') in 0.002149 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 62.195810 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00b9c7158fffae6fd30b3deae1858a28') in 0.003020 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.535249 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a0fc56e8bdc4d597ff073a0a8ff1c15') in 0.002409 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.747392 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c48721f745f890a43c4fec3654c2123c') in 0.002443 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.960086 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0dc0a5ae5db894c0fa01493cc4453152') in 0.003254 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 16.640698 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd553d41c0a8ce30f0b6bb212dd9e80f0') in 0.002456 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.506034 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6079dc222e84ac13b34e81430fee77c5') in 0.002921 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 27.657130 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92386153589a7d2233d4fb6b1aae0881') in 0.002976 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.704937 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f15ac91f00701ce2ce28b62696f3a633') in 0.002422 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 21727.367669 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c6594f08df899d22296fcc2d0c644f5') in 0.007685 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 63.387579 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd68282cc939dea5b2600f1273ba200ef') in 0.002512 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 866.739295 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc01624cf7f9a708139eb98e4f17f0b4') in 0.002437 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.815196 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9df812b93dea71eccc7ef0723504dd19') in 0.002862 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 20.234779 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c48c235c8589d4a75964d7b0b6e8cf60') in 0.002453 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 14.633869 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed3ce10708740c53ce99157422eade89') in 0.003225 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.074193 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c3bc088afaf0b13cccbdc76b8fed7556') in 0.002993 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.492216 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e500632c999601294d6e7a69451fd841') in 0.002499 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 254.065084 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9590902abb66f71887f2d2d36f0d4369') in 0.002763 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 33.922978 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68ff601da86ec182a20c46895fee6267') in 0.002772 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.111714 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ebee922a737b2a8fbb11a54c8e494351') in 0.002388 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 43.967862 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2bb81bcec0673f6d8da07798ca2e735b') in 0.002846 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 14.712995 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0af370f4c5583e683c60d7d9c8a2713a') in 0.003439 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 389.667852 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e54f54a6999b7af7e29b421ccb4a17fc') in 0.002596 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 13.848290 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '844a33f1cb813ba9707837173324dfd2') in 0.002740 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 755.833687 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd958e1bb34e41a4adc7f7eca48988e3d') in 0.002383 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.656831 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa52a9d10aa9c0760230371d4634d7ef') in 0.002461 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.687258 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68d89119d430d84b4e5bb6d7076ec881') in 0.002435 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2345.946920 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs
+  artifactKey: Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputGameMenu.cs using Guid(3a3bd24c78adbb2458a95777a621e54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c9b7f910e397d5f7cb12cec9be1759b') in 0.002535 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.559958 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f070516e06ee31bd8c186e47d82a222f') in 0.006799 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.814420 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs
+  artifactKey: Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputMoved.cs using Guid(21a8a479ae741654aa54a32599231872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '046a0762125356cf2d03aba9fe0a70ff') in 0.002267 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 17.668663 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3316aeab62181279355cf7cfcc91b795') in 0.006909 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 18.838847 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4389d2ba454bab7aefe88356eb5bd89a') in 0.002258 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.505651 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ddd04535c9cefdac84eb616a5ec661b') in 0.002489 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.586662 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '21e1c6573dbf391e59131a5e33d7c519') in 0.002786 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 47.290960 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '550e24d9c2fd50dc94a668083fe50af9') in 0.002439 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 9.713886 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba235f13139168e746b58ca9daccdd10') in 0.002611 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 19.583579 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '810b8acb697ab0842780bf01cb38d3a1') in 0.002401 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 22.661579 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c9f72df62b447621bf3224fbf16d74bb') in 0.002459 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.961281 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05df24cfbcc4e0da0d8e46d26b14c314') in 0.002560 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 23.096748 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a4b3a01838908dd0d4f0bd9c38ff927f') in 0.002782 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 38.263979 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e0544db4ca7fd21574ef86066d9c793e') in 0.002340 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.692068 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ebfe287b9fe97807195e33389c98fe33') in 0.002512 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.856979 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf942590cdfa27b51c67317e3cd2a07b') in 0.002670 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 11.711789 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a3eead0d1bde7a4fafe7fde875edbba') in 0.002514 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 17.461842 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '475b83fc0176838bdce036f6c607f61c') in 0.002590 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.068435 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd9c62247fd878f63c7712a22207660c4') in 0.002457 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 23.647217 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f09eeef7103769f30b4073598ffd1e56') in 0.002504 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 20.036019 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b196ee9b790c5d51b52af337100fb59') in 0.002420 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 9.189570 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68fe167c7c71dae086b6d328addc4108') in 0.002338 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 29.739282 seconds.
+  path: Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs
+  artifactKey: Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/StateMachine/PlayerInputStateMachine/PlayerInputUnitMenu.cs using Guid(07579dbd2e3cf0246b98a58131182393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a020f4cd5f81a247c65552e8b1bd573a') in 0.002799 seconds 

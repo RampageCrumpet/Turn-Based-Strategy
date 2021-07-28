@@ -14,6 +14,9 @@ public abstract class BaseState
     //Called each update a state is active.
     public virtual void UpdateState() { }
 
+ 
+
+    //Called when destroying a state
     public virtual void DestroyState() { }
 
 
