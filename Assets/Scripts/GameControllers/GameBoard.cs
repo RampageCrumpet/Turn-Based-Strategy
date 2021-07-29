@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,7 +58,7 @@ public class GameBoard : MonoBehaviour
     public GameTile GetTile(Vector2Int position)
     {
         if (!Contains(position))
-            Debug.LogError("Error: GameBoard does not contain the position " + position.ToString());
+            throw new ArgumentOutOfRangeException(position.ToString(), "Position is outside of GameBoard bounds.");
 
         return tiles[position.x, position.y];
     }

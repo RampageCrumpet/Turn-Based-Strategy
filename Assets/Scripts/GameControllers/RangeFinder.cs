@@ -11,6 +11,7 @@ namespace Pathfinding
 { 
     public class RangeFinder : MonoBehaviour
     {
+        [SerializeField]
         GameBoard gameBoard;
 
         private Dictionary<Vector2Int, Node> allNodes = new Dictionary<Vector2Int, Node>();
@@ -63,6 +64,10 @@ namespace Pathfinding
 
             foreach(Node neighbor in neighbors)
             {
+                //The tile we're looking at is off of the game board.
+                if (!gameBoard.Contains(neighbor.position))
+                    break;
+
                 if (GetTileCost(neighbor.position, movementType) == -1)
                 {
                     neighbor.isWalkable = false;

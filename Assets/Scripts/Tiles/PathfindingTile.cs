@@ -66,6 +66,9 @@ public class PathfindingTile
             case MovementType.Fly:
                 return flyCost;
 
+            case MovementType.TrueDistance:
+                return 1;
+
             default:
                 Debug.LogError(("Error {0} is not a movement type PathfindingTile.cs recognizes.", movementType.ToString()));
                 return -1; //Assume the tile is impassible to this movement type. 

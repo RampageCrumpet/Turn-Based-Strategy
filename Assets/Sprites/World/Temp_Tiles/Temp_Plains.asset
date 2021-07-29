@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Temp_Plains
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -4449035639142897077, guid: c8d3c982dcd265e4ca8851e72a3974c1, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.04903004, g: 0.5377358, b: 0.03804734, a: 1}
   m_Transform:
     e00: 1
     e01: 0

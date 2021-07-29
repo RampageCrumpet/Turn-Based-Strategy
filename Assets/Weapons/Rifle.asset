@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 778763946b62cd246ac647d1c60b6854, type: 3}
-  m_Name: MachineGun
+  m_Name: Rifle
   m_EditorClassIdentifier: 
-  weaponName: MachineGun
+  weaponName: UnnamedWeapon
   minimumRange: 0
   maximumRange: 1
-  weaponTargets: 5
+  weaponTargets: 0

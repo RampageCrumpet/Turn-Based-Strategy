@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: River
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 2d121898a2dc5e949a1cf9b4d1f97b1c, type: 2}
-  legCost: 1
+  legCost: 3
   wheelsCost: -1
   sailCost: -1
   hoverCost: 1

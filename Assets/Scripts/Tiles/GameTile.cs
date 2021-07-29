@@ -14,7 +14,7 @@ public class GameTile : PathfindingTile
 
     [SerializeField]
     [Tooltip("The number of defense dots this tile provides.")]
-    int defense = 0;
+    public int defense = 0;
 
     public GameTile(TileDefinition tileDefinition) : base(tileDefinition)
     {

@@ -30,23 +30,20 @@ public class Player : MonoBehaviour
             Debug.LogWarning("Attempting to select a unit outside of the map bounds.");
         }
 
-
-
-        //DEBUG STUFF:
-        if (SelectedUnit == null)
-            Debug.Log("Selected NULL");
-        else
-            Debug.Log("Selected Unit:" + SelectedUnit.name);
-
         return false;
     }
 
 
     public void DeselectUnit() => SelectedUnit = null;
 
-    public void IssueMoveOrder(Vector2Int position)
+    public bool IssueMoveOrder(Vector2Int position)
     {
-        SelectedUnit.Move(position);
+        return SelectedUnit.Move(position);
+    }
+
+    public void IssueAttackOrder(Vector2Int position)
+    {
+        SelectedUnit.AttackPosition(position);
     }
 
     public void EndTurn()

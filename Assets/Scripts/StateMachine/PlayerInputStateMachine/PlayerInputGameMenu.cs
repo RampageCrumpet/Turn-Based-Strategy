@@ -2,31 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInputGameMenu : BaseState
+namespace PlayerInputStateMachine
 {
-    PlayerInputController inputController;
-
-    public override void PrepareState()
+    public class PlayerInputGameMenu : BaseState
     {
-        base.PrepareState();
+        PlayerInputController inputController;
 
-        inputController = owner.GetComponent<PlayerInputController>();
+        public override void PrepareState()
+        {
+            base.PrepareState();
 
-        //Register our destroy state with the buttons.
-        inputController.gameMenu.InitializeButtons(DestroyState, DestroyState);
-    }
+            Debug.Log("GameMenu");
 
-    public override void UpdateState()
-    {
-        if (Input.GetMouseButtonDown(1))
+            inputController = owner.GetComponent<PlayerInputController>();
+
+            //Register our destroy state with the buttons.
+            inputController.gameMenu.InitializeButtons(CloseMenu, CloseMenu);
+        }
+
+        public override void UpdateState()
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                
+            }
+        }
+
+        public override void DestroyState()
+        {
+            inputController.gameMenu.HideGameMenu();
+            base.DestroyState();
+        }
+
+        public void CloseMenu()
         {
             owner.ChangeState(new PlayerInputUnselected());
         }
-    }
-
-    public override void DestroyState()
-    {
-        inputController.gameMenu.HideGameMenu();
-        base.DestroyState();
     }
 }

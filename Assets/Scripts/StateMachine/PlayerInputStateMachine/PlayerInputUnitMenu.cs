@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+namespace PlayerInputStateMachine
+{ 
 public class PlayerInputUnitMenu : BaseState
 {
     Player player;
@@ -12,15 +16,15 @@ public class PlayerInputUnitMenu : BaseState
     {
         base.PrepareState();
 
-        player = owner.GetComponent<Player>();
+            player = owner.GetComponent<Player>();
         playerInputController = owner.GetComponent<PlayerInputController>();
-        unitMenu = playerInputController.GetComponent<UnitMenu>();
+        unitMenu = playerInputController.unitMenu;
 
         //Hook the UnitMenu buttons up to functions
         unitMenu.InitializeButtons(UnitMenuAttack, UnitMenuWait,
              UnitMenuCancel, UnitMenuSpecial);
 
-        playerInputController.unitMenu.ShowUnitMenu(Input.mousePosition, false);
+        playerInputController. unitMenu.ShowUnitMenu(Input.mousePosition, false);
     }
 
     public override void UpdateState()
@@ -61,4 +65,5 @@ public class PlayerInputUnitMenu : BaseState
         player.DeselectUnit();
         unitMenu.HideUnitMenu();
     }
+}
 }

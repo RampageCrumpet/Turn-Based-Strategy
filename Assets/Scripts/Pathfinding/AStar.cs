@@ -28,7 +28,7 @@ namespace Pathfinding
         public bool isWalkable = true;
     }
 
-    public enum MovementType {Legs, Wheels, Treads, Hover, Sail, Fly}
+    public enum MovementType {Legs, Wheels, Treads, Hover, Sail, Fly, TrueDistance}
 
     public class AStar : MonoBehaviour
     {
