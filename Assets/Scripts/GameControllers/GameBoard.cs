@@ -9,7 +9,9 @@ public class GameBoard : MonoBehaviour
     public GameTile[,] tiles;
 
     //The tilemap we're drawing our information from.
-    public Tilemap tilemap;
+    [SerializeField]
+    [Tooltip("The tilemap to be used by the gameboard")]
+    private Tilemap tilemap;
 
     [SerializeField]
     [Tooltip("A list of TileDef's used to define the properties of each tile type.")]
@@ -80,7 +82,7 @@ public class GameBoard : MonoBehaviour
     //Takes a gameboard position and returns the world position associated with it.
     public Vector3 CellToWorld(Vector2Int tilePosition)
     {
-        Vector3Int tileMapPosition = new Vector3Int(tilePosition.x, tilePosition.y, 0) + tilemap.origin;
+        Vector3Int tileMapPosition = new Vector3Int(tilePosition.x, tilePosition.y, 0) + new Vector3Int(tilemap.origin.x, tilemap.origin.y,0);
         return tilemap.CellToWorld(tileMapPosition);
     }
 
@@ -128,6 +130,18 @@ public class GameBoard : MonoBehaviour
         tiles[targetPosition.x, targetPosition.y].unit = unit;
 
         Debug.Log("Unit position updated.");
+    }
+
+    //Adds a property to the map.
+    public void AddInstallation(Installation property, Vector2Int location)
+    {
+        if (!Contains(location))
+            throw new ArgumentOutOfRangeException(location.ToString());
+
+        if(tiles[location.x, location.y].property != null)
+            throw new ArgumentOutOfRangeException(location.ToString() + " already contains a property.");
+
+        tiles[location.x, location.y].property = property;
     }
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using System;
+using ExtensionMethods;
 
 [RequireComponent(typeof(PathFollower))]
 public class Unit : MonoBehaviour
@@ -67,6 +68,8 @@ public class Unit : MonoBehaviour
     void Start()
     {
         pathFollower = this.GetComponent<PathFollower>();
+
+        this.transform.position = this.transform.position.GetGridsnapPosition();
 
         //Set the starting position of the unit on the gameBoard.
         Position = GameController.gameController.gameBoard.WorldToCell(this.transform.position);

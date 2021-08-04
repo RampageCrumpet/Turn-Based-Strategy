@@ -15,7 +15,9 @@ public class Player : MonoBehaviour
     [Tooltip("The units the player owns.")]
     List<Unit> playerUnits = new List<Unit>();
 
-
+    [SerializeField]
+    [Tooltip("The installations this payer owns.")]
+    List<Installation> installations = new List<Installation>();
 
     public bool SelectUnit(Vector2Int position)
     {
@@ -55,5 +57,25 @@ public class Player : MonoBehaviour
         }
 
         GameController.gameController.EndTurn(this);
+    }
+
+    public bool OwnsUnit(Unit targetUnit)
+    {
+        foreach(Unit unit in playerUnits)
+        {
+            if (unit == targetUnit)
+                return true;
+        }
+
+
+        return false;
+    }
+
+    public void UpdateCash()
+    {
+        foreach(Installation installation in installations)
+        {
+            money += installation.income;
+        }
     }
 }
