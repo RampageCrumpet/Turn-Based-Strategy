@@ -10,6 +10,8 @@ public class Unit : MonoBehaviour
 {
     [Flags]
     public enum UnitType { Infantry = 1, Vehicle = 2, Helicopter = 4, Boat = 8, Aircraft = 16}
+    [Flags]
+    public enum AbilityFlag { Capture = 1}
 
 
     //Control Scripts
@@ -47,22 +49,34 @@ public class Unit : MonoBehaviour
     [Tooltip("This units type. Used for determining which weapons can attack it.")]
     UnitType unitType;
 
+
+
     [Space(10)]
     [Header("Armarments")]
     [SerializeField]
     [Tooltip("The weapons this unit can use to attack.")]
     public List<Weapon> unitWeapons;
 
+    //Actually a list of flags used to create the abilities. Unity doesn't support polymorphism in the inspector.
+    [SerializeField]
+    [Tooltip("The special abilities this unit has access to.")]
+    AbilityFlag abilityFlags;
+    
+
+    public List<Ability> abilities = new List<Ability>();
+
 
     //The remaining hitpoints on the unit.
-    int hitPoints = 10;
+    public int HitPoints { get; private set;} = 10;
 
 
     //A flag used to see if a unit has exhausted itself yet.
-    public bool CanMove { get;  set;} = false;
+    public bool CanMove { get; private set;} = false;
 
 
     public Vector2Int Position { get; protected set; }
+
+    public Player Player { get; protected set; }
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +89,8 @@ public class Unit : MonoBehaviour
         Position = GameController.gameController.gameBoard.WorldToCell(this.transform.position);
 
         GameController.gameController.AddUnitToGameBoard(this, Position);
+
+        CreateAbilities();
     }
 
     public bool Move(Vector2Int targetPosition)
@@ -116,15 +132,34 @@ public class Unit : MonoBehaviour
 
         foreach(Weapon weapon in unitWeapons)
         {
-            target.TakeDamage(weapon.CalculateDamage(hitPoints, target.Armor, targetDefense));
+            target.TakeDamage(weapon.CalculateDamage(HitPoints, target.Armor, targetDefense));
         }
     }
 
     public void TakeDamage(int damageTaken)
     {
-        hitPoints -= damageTaken;
+        HitPoints -= damageTaken;
         Debug.Log("Unit has taken " + damageTaken);
     }
 
+    //Readies a unit to take another turn.
+    public void ReadyUnit()
+    {
+        CanMove = true;
+    }
 
+    private void CreateAbilities()
+    {
+
+        if((abilityFlags & AbilityFlag.Capture) != 0)
+        {
+            Capture capture = new Capture();
+            capture.Initialize(this, GameController.gameController.gameBoard);
+        }
+    }
+
+    public void TakeOwnership(Player player)
+    {
+        this.Player = player;
+    }
 }

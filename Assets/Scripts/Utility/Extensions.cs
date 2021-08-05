@@ -10,8 +10,12 @@ namespace ExtensionMethods
         {
             GameBoard gameBoard = GameController.gameController.gameBoard;
             Vector2Int gameBoardPosition = gameBoard.WorldToCell(unsnappedPosition);
+            Vector3 snapPosition = gameBoard.CellToWorld(gameBoardPosition);
 
-            return gameBoard.CellToWorld(gameBoardPosition);
+            //Preserve the Z position so we don't set a snap position ontop of the gameboard.
+            snapPosition.z = unsnappedPosition.z ;
+
+            return snapPosition;
         }
     }
 }

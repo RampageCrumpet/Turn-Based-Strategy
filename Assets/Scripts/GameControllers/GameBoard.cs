@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class GameBoard : MonoBehaviour
 {
-    public GameTile[,] tiles;
+    private GameTile[,] tiles;
 
     //The tilemap we're drawing our information from.
     [SerializeField]
@@ -82,6 +82,7 @@ public class GameBoard : MonoBehaviour
     //Takes a gameboard position and returns the world position associated with it.
     public Vector3 CellToWorld(Vector2Int tilePosition)
     {
+        //Convert the GameBoard cell to a tilemap cell.
         Vector3Int tileMapPosition = new Vector3Int(tilePosition.x, tilePosition.y, 0) + new Vector3Int(tilemap.origin.x, tilemap.origin.y,0);
         return tilemap.CellToWorld(tileMapPosition);
     }
@@ -138,10 +139,10 @@ public class GameBoard : MonoBehaviour
         if (!Contains(location))
             throw new ArgumentOutOfRangeException(location.ToString());
 
-        if(tiles[location.x, location.y].property != null)
+        if(tiles[location.x, location.y].installation != null)
             throw new ArgumentOutOfRangeException(location.ToString() + " already contains a property.");
 
-        tiles[location.x, location.y].property = property;
+        tiles[location.x, location.y].installation = property;
     }
 
 

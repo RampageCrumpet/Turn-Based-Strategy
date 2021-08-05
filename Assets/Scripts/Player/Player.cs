@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
     public Unit SelectedUnit { get; private set; }
 
     [SerializeField]
@@ -17,7 +18,17 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     [Tooltip("The installations this payer owns.")]
-    List<Installation> installations = new List<Installation>();
+    List<Installation> playerInstallations = new List<Installation>();
+
+    private void Start()
+    {
+        //Mark each unit as being owned by this player.
+        foreach(Unit unit in playerUnits)
+        {
+            unit.TakeOwnership(this);
+        }
+    }
+
 
     public bool SelectUnit(Vector2Int position)
     {
@@ -53,7 +64,7 @@ public class Player : MonoBehaviour
         //Allow each unit to move again next turn.
         foreach(Unit unit in playerUnits)
         {
-            unit.CanMove = true;
+            unit.ReadyUnit();
         }
 
         GameController.gameController.EndTurn(this);
@@ -73,9 +84,24 @@ public class Player : MonoBehaviour
 
     public void UpdateCash()
     {
-        foreach(Installation installation in installations)
+        foreach(Installation installation in playerInstallations)
         {
-            money += installation.income;
+            money += installation.Income;
         }
+    }
+    
+    public void RemoveUnit(Unit unit)
+    {
+        playerUnits.Remove(unit);
+    }
+
+    public void RemoveInstallation(Installation installation)
+    {
+        playerInstallations.Remove(installation);
+    }
+
+    public void AddInstallation(Installation installation)
+    {
+        playerInstallations.Add(installation);
     }
 }

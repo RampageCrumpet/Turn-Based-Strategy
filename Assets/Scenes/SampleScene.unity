@@ -7773,6 +7773,28 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &1519408549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6188300035054537635, guid: 36b31511940b4314bb8f36ea04d11ee5, type: 3}
+  m_PrefabInstance: {fileID: 6188300034513708921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7a884839e13474095f8535ae08493a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1519408550 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6188300035054537632, guid: 36b31511940b4314bb8f36ea04d11ee5, type: 3}
+  m_PrefabInstance: {fileID: 6188300034513708921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fc2128835fabb4da53ee2e3c67308e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1540993067
 GameObject:
   m_ObjectHideFlags: 0
@@ -8368,15 +8390,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6188300035054537646, guid: 36b31511940b4314bb8f36ea04d11ee5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.7260427
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6188300035054537646, guid: 36b31511940b4314bb8f36ea04d11ee5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.7765882
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 6188300035054537646, guid: 36b31511940b4314bb8f36ea04d11ee5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.799527
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 6188300035054537646, guid: 36b31511940b4314bb8f36ea04d11ee5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8410,6 +8432,18 @@ PrefabInstance:
       propertyPath: pathfinder
       value: 
       objectReference: {fileID: 713003217}
+    - target: {fileID: 6188300035054537647, guid: 36b31511940b4314bb8f36ea04d11ee5, type: 3}
+      propertyPath: <gameBoard>k__BackingField
+      value: 
+      objectReference: {fileID: 1519408550}
+    - target: {fileID: 6188300035054537647, guid: 36b31511940b4314bb8f36ea04d11ee5, type: 3}
+      propertyPath: <pathfinder>k__BackingField
+      value: 
+      objectReference: {fileID: 713003217}
+    - target: {fileID: 6188300035054537647, guid: 36b31511940b4314bb8f36ea04d11ee5, type: 3}
+      propertyPath: <rangeFinder>k__BackingField
+      value: 
+      objectReference: {fileID: 1519408549}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36b31511940b4314bb8f36ea04d11ee5, type: 3}
 --- !u!1001 &8815361976884073091

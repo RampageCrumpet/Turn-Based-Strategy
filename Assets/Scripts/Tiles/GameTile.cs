@@ -11,7 +11,7 @@ using UnityEngine;
 public class GameTile : PathfindingTile
 {
     public Unit unit = null;
-    public Installation property = null;
+    public Installation installation = null;
 
     [SerializeField]
     [Tooltip("The number of defense dots this tile provides.")]

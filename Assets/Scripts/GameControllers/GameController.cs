@@ -8,11 +8,16 @@ using Pathfinding;
 [RequireComponent(typeof(AStar))]
 public class GameController : MonoBehaviour
 {
-    //Control scripts. Currently public, should probbably be made private and fetched from the GameController. 
-    public AStar pathfinder;
-    public static GameController gameController;
-    public GameBoard gameBoard;
-    public RangeFinder rangeFinder;
+    [field: SerializeField]
+    public AStar pathfinder { get; protected set; }
+    [field: SerializeField]
+
+    public static GameController gameController { get; protected set; }
+
+    [field: SerializeField]
+    public GameBoard gameBoard { get; protected set; }
+    [field: SerializeField]
+    public RangeFinder rangeFinder { get; protected set; }
 
 
 
