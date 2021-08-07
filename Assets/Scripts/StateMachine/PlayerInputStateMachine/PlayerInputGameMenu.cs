@@ -22,10 +22,7 @@ namespace PlayerInputStateMachine
 
         public override void UpdateState()
         {
-            if (Input.GetMouseButtonDown(1))
-            {
-                
-            }
+
         }
 
         public override void DestroyState()

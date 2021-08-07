@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 public class Player : MonoBehaviour
 {
-    
     public Unit SelectedUnit { get; private set; }
 
-    [SerializeField]
-    [Tooltip("The players starting cash.")]
-    private int money = 0;
+    [field: SerializeField]
+    public int Money { get; private set; } = 0;
 
     [SerializeField]
     [Tooltip("The units the player owns.")]
@@ -20,11 +19,18 @@ public class Player : MonoBehaviour
     [Tooltip("The installations this payer owns.")]
     List<Installation> playerInstallations = new List<Installation>();
 
+    [field: SerializeField]
+    [field: Tooltip("The commander in use by this player")]
+    public Commander PlayerCommander { get; private set; }
+
     private void Start()
     {
         //Mark each unit as being owned by this player.
         foreach(Unit unit in playerUnits)
         {
+            if (unit == null)
+                throw new System.NullReferenceException("Player has NULL unit reference");
+
             unit.TakeOwnership(this);
         }
     }
@@ -33,10 +39,14 @@ public class Player : MonoBehaviour
     public bool SelectUnit(Vector2Int position)
     {
         GameBoard gameBoard = GameController.gameController.gameBoard;
+        Unit targetUnit = gameBoard.GetTile(position).unit;
 
         if (gameBoard.Contains(position))
         {
-            SelectedUnit = gameBoard.GetTile(position).unit;
+            if(Owns(targetUnit))
+            {
+                SelectedUnit = targetUnit;
+            }
         }
         else
         {
@@ -70,7 +80,7 @@ public class Player : MonoBehaviour
         GameController.gameController.EndTurn(this);
     }
 
-    public bool OwnsUnit(Unit targetUnit)
+    public bool Owns(Unit targetUnit)
     {
         foreach(Unit unit in playerUnits)
         {
@@ -82,11 +92,22 @@ public class Player : MonoBehaviour
         return false;
     }
 
+    public bool Owns(Installation targetInstallation)
+    {
+        foreach (Installation installation in playerInstallations)
+        {
+            if (installation == targetInstallation)
+                return true;
+        }
+        return false;
+    }
+
+
     public void UpdateCash()
     {
         foreach(Installation installation in playerInstallations)
         {
-            money += installation.Income;
+            Money += installation.Income;
         }
     }
     
@@ -103,5 +124,19 @@ public class Player : MonoBehaviour
     public void AddInstallation(Installation installation)
     {
         playerInstallations.Add(installation);
+    }
+
+    public void PurchaseUnit(Unit unitPrefab, Vector3 position)
+    {
+        //If we don't have enough money we're done.
+        if (Money < unitPrefab.Cost)
+            return;
+
+        Money -= unitPrefab.Cost;
+
+        GameObject newUnitGameObject = Instantiate(unitPrefab.gameObject, position, unitPrefab.gameObject.transform.rotation);
+        Unit  newUnit = newUnitGameObject.GetComponent<Unit>();
+        newUnit.TakeOwnership(this);
+        playerUnits.Add(newUnit);
     }
 }

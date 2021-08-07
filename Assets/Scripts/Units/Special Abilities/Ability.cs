@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class Ability
 {
     protected Unit owner;
-    string name = "Unamed Ability";
+    public string name { get; protected set; } = "Unamed Ability";
 
     public virtual void Initialize(Unit owner)
     {

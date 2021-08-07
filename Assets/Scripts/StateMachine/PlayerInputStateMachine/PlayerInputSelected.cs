@@ -69,8 +69,6 @@ namespace PlayerInputStateMachine
                         owner.ChangeState(new PlayerInputUnselected());
                         return;
                     }
-
-                    
                     
                     Stack<Vector2Int> path = pathfinder.FindPath(player.SelectedUnit.Position, tilePosition, MovementType.TrueDistance);
                     int pathCost = pathfinder.GetPathCost(path, MovementType.TrueDistance);

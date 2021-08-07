@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class UnitMenu : MonoBehaviour
 {
-
     RectTransform panel;
 
     [SerializeField]
@@ -19,27 +18,27 @@ public class UnitMenu : MonoBehaviour
     [SerializeField]
     Button cancelButton;
 
-    [SerializeField]
-    Button specialButton;
-
-    [SerializeField]
-    Text specialText;
+    List<Button> abilityButtons = new List<Button>();
 
     public void Start()
     {
         panel = this.GetComponent<RectTransform>();
-
         this.gameObject.SetActive(false);
-
-
-        //I'm not currently using the special button. It's being saved for later.
-        specialButton.gameObject.SetActive(false);
     }
 
 
     public void HideUnitMenu()
     {
         this.gameObject.SetActive(false);
+
+        foreach (Button button in abilityButtons)
+        {
+            
+            button.gameObject.SetActive(false);
+            button.onClick.RemoveAllListeners();
+        }
+
+        abilityButtons.Clear();
     }
 
     public void ShowUnitMenu(Vector2 displayPosition, bool showAttack)
@@ -51,11 +50,25 @@ public class UnitMenu : MonoBehaviour
         attackButton.gameObject.SetActive(showAttack);
     }
 
-    public void InitializeButtons(UnityAction attackCallback, UnityAction waitCallback, UnityAction cancelCallback, UnityAction specialCallback)
+    public void InitializeStandardButtons(UnityAction attackCallback, UnityAction waitCallback, UnityAction cancelCallback)
     {
         attackButton.onClick.AddListener(attackCallback);
         waitButton.onClick.AddListener(waitCallback);
         cancelButton.onClick.AddListener(cancelCallback);
-        specialButton.onClick.AddListener(specialCallback);
+    }
+
+    public void InitializeAbilityButton(Ability ability, UnityAction specialCallback)
+    {
+        GameObject buttonObject = ObjectPooler.objectPooler.GetPooledObject("Button");
+        Button button = buttonObject.GetComponent<Button>();
+
+        buttonObject.GetComponentInChildren<Text>().text = ability.name;
+
+        button.onClick.AddListener(ability.Execute);
+        button.onClick.AddListener(specialCallback);
+        buttonObject.transform.SetParent(panel);
+        abilityButtons.Add(button);
+
+        buttonObject.SetActive(true);
     }
 }

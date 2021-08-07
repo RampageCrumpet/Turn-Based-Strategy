@@ -8,7 +8,7 @@ namespace PlayerInputStateMachine
     {
         Player player;
         PlayerInputController inputController;
-
+        GameBoard gameBoard;
 
 
         public override void PrepareState()
@@ -17,6 +17,7 @@ namespace PlayerInputStateMachine
 
             player = owner.GetComponent<Player>();
             inputController = owner.GetComponent<PlayerInputController>();
+            gameBoard = GameController.gameController.gameBoard;
 
             player.DeselectUnit();
         }
@@ -41,8 +42,19 @@ namespace PlayerInputStateMachine
                 }
                 else
                 {
-                    owner.ChangeState(new PlayerInputGameMenu());
-                    inputController.gameMenu.ShowGameMenu(Input.mousePosition);
+                    UnitCreator unitCreator = gameBoard.GetTile(tilePosition).installation as UnitCreator;
+                    if (unitCreator != null && player.Owns(unitCreator))
+                    {
+                        owner.ChangeState(new PlayerInputConstructionMenu());
+                    }
+                    else //If we didn't click on a unit producing installation
+                    {
+                        owner.ChangeState(new PlayerInputGameMenu());
+                        inputController.gameMenu.ShowGameMenu(Input.mousePosition);
+                    }
+
+
+                        
                 }
             }
         }

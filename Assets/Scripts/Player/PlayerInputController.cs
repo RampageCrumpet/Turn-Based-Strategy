@@ -19,6 +19,10 @@ public class PlayerInputController : MonoBehaviour
     [Tooltip("The GameMenu class we want to get Input from.")]
     public GameMenu gameMenu;
 
+    [SerializeField]
+    [Tooltip("The games ConstructionMenu")]
+    public ConstructionMenu constructionMenu;
+
     [Header("Tile Indicator Sprites")]
     [SerializeField]
     [Tooltip("The sprite to be displayed on tiles the unit can move to.")]

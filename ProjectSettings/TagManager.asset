@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - TileIndicator
+  - Button
+  - ConstructionButton
   layers:
   - Default
   - TransparentFX

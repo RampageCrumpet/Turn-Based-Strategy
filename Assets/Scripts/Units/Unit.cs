@@ -22,13 +22,13 @@ public class Unit : MonoBehaviour
     public static event MoveUnit OnMove;
 
 
-    [SerializeField]
-    [Tooltip("The Units name displayed in game.")]
-    string unitName = "Unnamed Unit";
+    [field: SerializeField]
+    [field: Tooltip("The Units name displayed in game.")]
+    public string UnitName { get; private set; } = "Unnamed Unit";
 
     [Space(10)]
     [Header("Unit Statistics")]
-    [SerializeField]
+    [field :SerializeField]
     [Tooltip("How many tiles a unit can move in one turn.")]
     public uint movement = 1;
 
@@ -49,7 +49,9 @@ public class Unit : MonoBehaviour
     [Tooltip("This units type. Used for determining which weapons can attack it.")]
     UnitType unitType;
 
-
+    [field: SerializeField]
+    [field: Tooltip("The cost to deploy this unit at a factory.")]
+    public int Cost { get; private set; } = 100;
 
     [Space(10)]
     [Header("Armarments")]
@@ -150,11 +152,11 @@ public class Unit : MonoBehaviour
 
     private void CreateAbilities()
     {
-
         if((abilityFlags & AbilityFlag.Capture) != 0)
         {
             Capture capture = new Capture();
             capture.Initialize(this, GameController.gameController.gameBoard);
+            abilities.Add(capture);
         }
     }
 
@@ -162,4 +164,6 @@ public class Unit : MonoBehaviour
     {
         this.Player = player;
     }
+
+
 }

@@ -17,6 +17,7 @@ public class Capture : Ability
         base.Initialize(owner);
 
         this.gameBoard = gameBoard;
+        name = "Capture";
     }
 
 
