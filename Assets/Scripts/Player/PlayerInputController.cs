@@ -2,26 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PlayerInputStateMachine;
+using Mirror;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(StateMachine))]
-public class PlayerInputController : MonoBehaviour
+public class PlayerInputController : NetworkBehaviour
 {
     //Control scripts
     Player player;
     GameBoard gameBoard;
 
-    [SerializeField]
-    [Tooltip("The UnitMenu class we want to get Input from.")]
-    public UnitMenu unitMenu;
 
-    [SerializeField]
-    [Tooltip("The GameMenu class we want to get Input from.")]
-    public GameMenu gameMenu;
+    [Header("Prefabs")]
+    public UnitMenu unitMenuPrefab;
 
-    [SerializeField]
-    [Tooltip("The games ConstructionMenu")]
-    public ConstructionMenu constructionMenu;
+    public GameMenu gameMenuPrefab;
+
+    public ConstructionMenu constructionMenuPrefab;
+
+    public UnitMenu UnitMenu { get; private set; }
+    public GameMenu GameMenu { get; private set; }
+    public ConstructionMenu ConstructionMenu { get; private set; }
 
     [Header("Tile Indicator Sprites")]
     [SerializeField]
@@ -40,10 +41,28 @@ public class PlayerInputController : MonoBehaviour
         player = this.GetComponent<Player>();
         gameBoard = GameController.gameController.gameBoard;
 
+        if (!player.hasAuthority)
+        {
+            return;
+        }
+
         playerInputStateMachine = this.GetComponent<StateMachine>();
         playerInputStateMachine.ChangeState(new PlayerInputUnselected());
 
+        Canvas canvas = FindObjectOfType<Canvas>();
+        GameMenu = Object.Instantiate(gameMenuPrefab, canvas.transform).GetComponent<GameMenu>();
+        ConstructionMenu = Object.Instantiate(constructionMenuPrefab, canvas.transform).GetComponent<ConstructionMenu>();
+        UnitMenu = Object.Instantiate(unitMenuPrefab, canvas.transform).GetComponent<UnitMenu>();
     }
 
+    public void IssueMoveOrder(Vector2Int position)
+    {
+        player.CmdIssueMoveOrder(position, player.SelectedUnit.gameObject);
+    }
+
+    public void IssueAttackOrder(Vector2Int position)
+    {
+        player.CmdIssueAttackOrder(position, player.SelectedUnit.gameObject);
+    }
 }
 

@@ -11,11 +11,11 @@ namespace PlayerInputStateMachine
         Player player;
         PlayerInputController playerInputController;
 
-        List<GameObject> tileDisplaIndicators = new List<GameObject>();
+        List<GameObject> tileDisplayIndicators = new List<GameObject>();
         RangeFinder rangeFinder = GameController.gameController.rangeFinder;
         AStar pathfinder;
         GameBoard gameBoard;
-        Unit unit;
+        Unit selectedUnit;
 
         public override void PrepareState()
         {
@@ -23,7 +23,7 @@ namespace PlayerInputStateMachine
 
             player = owner.GetComponent<Player>();
             playerInputController = owner.GetComponent<PlayerInputController>();
-            unit = player.SelectedUnit;
+            selectedUnit = player.SelectedUnit;
             pathfinder = GameController.gameController.pathfinder;
             gameBoard = GameController.gameController.gameBoard;
 
@@ -45,14 +45,17 @@ namespace PlayerInputStateMachine
             //If we click an empty space we want to move there, if we click a unit we want to display the UnitMenu.
             if (Input.GetMouseButtonDown(0))
             {
+                Path path = pathfinder.FindPath(player.SelectedUnit.Position, tilePosition, MovementType.TrueDistance);
+
                 //We clicked an empty space, we want to move to it. 
                 bool clickedOnEmptyTile = gameBoard.GetTile(tilePosition).unit == null;
 
                 if (clickedOnEmptyTile)
                 {
                     //If the player successfully moved.
-                    if(player.IssueMoveOrder(tilePosition))
+                    if(player.SelectedUnit.CanFollow(path))
                     {
+                        playerInputController.IssueMoveOrder(tilePosition);
                         owner.ChangeState(new PlayerInputMoved());
                     }
                     else //Something blocked our move. Deselect our tile.
@@ -64,30 +67,26 @@ namespace PlayerInputStateMachine
                 else //We clicked on a unit.
                 {
                     //If we have no weapon deselect our unit.
-                    if(unit.unitWeapons == null)
+                    if(selectedUnit.unitWeapons == null)
                     {
                         owner.ChangeState(new PlayerInputUnselected());
                         return;
                     }
-                    
-                    Stack<Vector2Int> path = pathfinder.FindPath(player.SelectedUnit.Position, tilePosition, MovementType.TrueDistance);
-                    int pathCost = pathfinder.GetPathCost(path, MovementType.TrueDistance);
 
-                    foreach(Weapon weapon in unit.unitWeapons)
+                    foreach(Weapon weapon in selectedUnit.unitWeapons)
                     {
                         //If the target is already in range of any of our weapons attack it. 
-                        if (pathCost <= weapon.maximumRange && pathCost >= weapon.minimumRange)
+                        if (path.Cost <= weapon.maximumRange && path.Cost >= weapon.minimumRange)
                         {
                             //Attack the unit, deselect this unit and then leave the function
-                            player.IssueAttackOrder(tilePosition);
-                            owner.ChangeState(new PlayerInputUnselected());
-                            return;
+                            playerInputController.IssueAttackOrder(tilePosition);
                         }
                         else //Otherwise we want to the cheapest square adjacent to our target.
                         {
                             Vector2Int cheapestNeighbor = FindCheapestNeighbor(tilePosition);
-                            player.IssueMoveOrder(cheapestNeighbor);
-                            player.IssueAttackOrder(tilePosition);
+
+                            playerInputController.IssueMoveOrder(cheapestNeighbor);
+                            playerInputController.IssueAttackOrder(tilePosition);
                         }
                     }
 
@@ -99,18 +98,17 @@ namespace PlayerInputStateMachine
 
         public override void DestroyState()
         {
-            base.DestroyState();
-
-            foreach(GameObject tileDisplayIndicator in tileDisplaIndicators)
+            foreach(GameObject tileDisplayIndicator in tileDisplayIndicators)
             {
                 tileDisplayIndicator.SetActive(false);
             }
+            base.DestroyState();
         }
 
         private void CreateMovementIndicators()
-        {
-            List<Vector2Int> movementLocations = rangeFinder.GetTilesWithinRange(unit.Position,
-            0, unit.movement, unit.movementType).ToList();
+        {       
+            List<Vector2Int> movementLocations = rangeFinder.GetTilesWithinRange(selectedUnit.Position,
+            0, selectedUnit.movement, selectedUnit.movementType).ToList();
 
             //Create all of the tile indicators.
             foreach (Vector2Int boardPosition in movementLocations)
@@ -122,7 +120,7 @@ namespace PlayerInputStateMachine
                 GameObject tileIndicator = ObjectPooler.objectPooler.GetPooledObject("TileIndicator");
 
 
-                tileDisplaIndicators.Add(tileIndicator);
+                tileDisplayIndicators.Add(tileIndicator);
 
                 tileIndicator.GetComponent<SpriteRenderer>().sprite = playerInputController.moveIndicatorSprite;
 
@@ -145,7 +143,7 @@ namespace PlayerInputStateMachine
                 uint max = (uint)(weapon.maximumRange + (weapon.canFireAfterMoving ? player.SelectedUnit.movement : 0));
                 uint min = (uint)(weapon.canFireAfterMoving ? 0 : weapon.minimumRange);
 
-                attackLocations.UnionWith(rangeFinder.GetTilesWithinRange(unit.Position, min, max, unit.movementType));
+                attackLocations.UnionWith(rangeFinder.GetTilesWithinRange(selectedUnit.Position, min, max, selectedUnit.movementType));
             }
 
             //Create the attack indicators
@@ -156,7 +154,7 @@ namespace PlayerInputStateMachine
                 {
                     GameObject tileIndicator = ObjectPooler.objectPooler.GetPooledObject("TileIndicator");
 
-                    tileDisplaIndicators.Add(tileIndicator);
+                    tileDisplayIndicators.Add(tileIndicator);
                     tileIndicator.GetComponent<SpriteRenderer>().sprite = playerInputController.attackIndicatorSprite;
 
                     //Set the tileIndicator to the right X/Y position
@@ -177,8 +175,7 @@ namespace PlayerInputStateMachine
             //Prime the search.
 
             Vector2Int cheapestNeighborPosition = tilePosition + new Vector2Int(1, 0);
-            Stack<Vector2Int> primingPath = pathfinder.FindPath(player.SelectedUnit.Position, cheapestNeighborPosition, player.SelectedUnit.movementType);
-            int cheapestNeighborCost = pathfinder.GetPathCost(primingPath, player.SelectedUnit.movementType);
+            Path cheapestNeighborPath = pathfinder.FindPath(player.SelectedUnit.Position, cheapestNeighborPosition, player.SelectedUnit.movementType);
 
             //For each cardinal direction
             for (int x = -1; x <= 1; x++)
@@ -190,14 +187,13 @@ namespace PlayerInputStateMachine
                         continue;
 
                     Vector2Int offset = new Vector2Int(x, y);
-                    Stack<Vector2Int> neighborPath = pathfinder.FindPath(player.SelectedUnit.Position, tilePosition + offset, player.SelectedUnit.movementType);
-                    int neighborCost = pathfinder.GetPathCost(neighborPath, player.SelectedUnit.movementType);
+                    Path neighborPath = pathfinder.FindPath(player.SelectedUnit.Position, tilePosition + offset, player.SelectedUnit.movementType);
 
                     //if the neighbor we explored takes more to get to than our current cheapest check the next one.
-                    if (neighborCost > cheapestNeighborCost)
+                    if (neighborPath.Cost > cheapestNeighborPath.Cost)
                         continue;
 
-                    cheapestNeighborCost = neighborCost;
+                    cheapestNeighborPath = neighborPath;
                     cheapestNeighborPosition = tilePosition + offset;
                 }
             }

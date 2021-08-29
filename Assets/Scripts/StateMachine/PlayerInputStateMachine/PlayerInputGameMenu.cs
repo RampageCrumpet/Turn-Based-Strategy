@@ -12,12 +12,10 @@ namespace PlayerInputStateMachine
         {
             base.PrepareState();
 
-            Debug.Log("GameMenu");
-
             inputController = owner.GetComponent<PlayerInputController>();
 
             //Register our destroy state with the buttons.
-            inputController.gameMenu.InitializeButtons(CloseMenu, CloseMenu);
+            inputController.GameMenu.InitializeButtons(CloseMenu, CloseMenu);
         }
 
         public override void UpdateState()
@@ -27,7 +25,7 @@ namespace PlayerInputStateMachine
 
         public override void DestroyState()
         {
-            inputController.gameMenu.HideGameMenu();
+            inputController.GameMenu.HideGameMenu();
             base.DestroyState();
         }
 

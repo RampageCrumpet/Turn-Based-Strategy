@@ -19,14 +19,14 @@ namespace PlayerInputStateMachine
 
             playerInputController = owner.GetComponent<PlayerInputController>();
             Player player = playerInputController.gameObject.GetComponent<Player>();
-            constructionMenu = playerInputController.constructionMenu;
+            constructionMenu = playerInputController.ConstructionMenu;
             position = (Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetGridsnapPosition();
             position.z = 0; //Set the Z position to zero so it doesn't appear behind the tilemap.
 
             //Initialize all of the buttons in the construction menu.
             foreach (Unit unit in player.PlayerCommander.ConstructionPrefabs)
             {
-                constructionMenu.InitializeConstructionButton(player.PurchaseUnit, ChangeState, unit, position);
+                constructionMenu.InitializeConstructionButton(player.CmdPurchaseUnit, ChangeState, unit, position);
             }
 
             constructionMenu.ShowConstructionMenu();

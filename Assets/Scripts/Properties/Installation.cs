@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ExtensionMethods;
+using Mirror; 
 
-public class Installation : MonoBehaviour
+public class Installation : NetworkBehaviour
 {
     [field: SerializeField]
     public int Income { get; private set; }
@@ -29,14 +30,17 @@ public class Installation : MonoBehaviour
 
     public void CaptureInstallation(Player player)
     {
-        if (player = null)
+        if (player == null)
             throw new System.NullReferenceException();
 
         //Remove the installation from the old player.
         if (owningPlayer != null)
-            owningPlayer.RemoveInstallation(this);
+        {
+            owningPlayer.RemoveInstallation(this.gameObject);
+        }
 
-        player.AddInstallation(this);
+
+        player.AddInstallation(this.gameObject);
         owningPlayer = player;
     }
 }

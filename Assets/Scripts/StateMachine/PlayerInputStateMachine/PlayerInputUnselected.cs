@@ -33,7 +33,7 @@ namespace PlayerInputStateMachine
             {
                 //Select the unit in that tile
                 player.SelectUnit(tilePosition);
-
+                
 
                 if (player.SelectedUnit != null)
                 {
@@ -50,7 +50,7 @@ namespace PlayerInputStateMachine
                     else //If we didn't click on a unit producing installation
                     {
                         owner.ChangeState(new PlayerInputGameMenu());
-                        inputController.gameMenu.ShowGameMenu(Input.mousePosition);
+                        inputController.GameMenu.ShowGameMenu(Input.mousePosition);
                     }
 
 

@@ -4,9 +4,10 @@ using UnityEngine;
 using Pathfinding;
 using System;
 using ExtensionMethods;
+using Mirror;
 
 [RequireComponent(typeof(PathFollower))]
-public class Unit : MonoBehaviour
+public class Unit : NetworkBehaviour
 {
     [Flags]
     public enum UnitType { Infantry = 1, Vehicle = 2, Helicopter = 4, Boat = 8, Aircraft = 16}
@@ -18,7 +19,7 @@ public class Unit : MonoBehaviour
     PathFollower pathFollower;
 
     //Events
-    public delegate void MoveUnit(Unit unit, Vector2Int startingPosition, Vector2Int targetPosition);
+    public delegate void MoveUnit(GameObject unitObject, Vector2Int startingPosition, Vector2Int targetPosition);
     public static event MoveUnit OnMove;
 
 
@@ -69,11 +70,12 @@ public class Unit : MonoBehaviour
 
 
     //The remaining hitpoints on the unit.
+    [field: SyncVar]
     public int HitPoints { get; private set;} = 10;
 
 
     //A flag used to see if a unit has exhausted itself yet.
-    public bool CanMove { get; private set;} = false;
+    public bool CanMove { get; private set;} = true;
 
 
     public Vector2Int Position { get; protected set; }
@@ -83,6 +85,11 @@ public class Unit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitializeUnit();
+    }
+
+    private void InitializeUnit()
+    {
         pathFollower = this.GetComponent<PathFollower>();
 
         this.transform.position = this.transform.position.GetGridsnapPosition();
@@ -90,51 +97,73 @@ public class Unit : MonoBehaviour
         //Set the starting position of the unit on the gameBoard.
         Position = GameController.gameController.gameBoard.WorldToCell(this.transform.position);
 
+
         GameController.gameController.AddUnitToGameBoard(this, Position);
 
         CreateAbilities();
     }
 
-    public bool Move(Vector2Int targetPosition)
+ 
+
+
+    [Server]
+    public void ServerMove(Vector2Int targetPosition)
     {
-        Vector2Int startPosition = GameController.gameController.gameBoard.WorldToCell(this.transform.position);
-        Stack <Vector2Int> path = GameController.gameController.pathfinder.FindPath(startPosition, targetPosition, movementType);
+        //We need to update the position of the unit on server only setups.
+        if(isServerOnly)
+            UpdatePosition(targetPosition);
 
-        //If we failed to generate a path we want to return false. We will not be following the path.
-        if (path == null)
-            return false;
-
-        //If the path is longer than we're allowed to remove we want to return false. We wont be following the path.
-        if (GameController.gameController.pathfinder.GetPathCost(path, movementType) > movement)
-            return false;
-
-        //Trigger observers to watch for this unit moving. OnMove should never be null.
-        OnMove(this, startPosition, targetPosition);
-
-        //Update our recorded position.
-        Position = targetPosition;
-
-        pathFollower.FollowPath(path);
-        return true;
+        RpcMove(targetPosition);
+        
     }
 
-    public void AttackPosition(Vector2Int position)
+    [ClientRpc]
+    public void RpcMove(Vector2Int targetPosition)
+    {
+        //If we're already at the target position we don't need to move.
+        if (this.Position == targetPosition)
+            return;
+
+
+        //Create the path and order the Unit's visualization to follow it.
+        Vector2Int startPosition = GameController.gameController.gameBoard.WorldToCell(this.transform.position);
+        Path path = GameController.gameController.pathfinder.FindPath(startPosition, targetPosition, movementType, Player);
+        pathFollower.FollowPath(path);
+
+        UpdatePosition(targetPosition);
+    }
+
+    [Server]
+    public void ServerAttack(Vector2Int position)
     {
         Unit target = GameController.gameController.gameBoard.GetTile(position).unit;
         int targetDefense = GameController.gameController.gameBoard.GetTile(position).defense;
 
-        AttackTarget(target, targetDefense);
+        if(isServerOnly)
+        {
+            AttackTarget(target, targetDefense);
+        }
+            
+
+        RpcAttackTarget(target.gameObject, targetDefense);
     }
 
-    public void AttackTarget(Unit target, int targetDefense)
+    [ClientRpc]
+    public void RpcAttackTarget(GameObject targetGameObject, int targetDefense)
+    {
+        Unit targetUnit = targetGameObject.GetComponent<Unit>();
+        AttackTarget(targetUnit, targetDefense);
+    }
+
+    private void AttackTarget(Unit targetUnit, int targetDefense)
     {
         //We can't attack with an undefined set of weapons.
         if (unitWeapons == null)
             return;
 
-        foreach(Weapon weapon in unitWeapons)
+        foreach (Weapon weapon in unitWeapons)
         {
-            target.TakeDamage(weapon.CalculateDamage(HitPoints, target.Armor, targetDefense));
+            targetUnit.TakeDamage(weapon.CalculateDamage(HitPoints, targetUnit.Armor, targetDefense));
         }
     }
 
@@ -165,5 +194,29 @@ public class Unit : MonoBehaviour
         this.Player = player;
     }
 
+    public bool CanFollow(Path path)
+    {
+        if (CanMove == false)
+            return false;
+
+        //If we failed to generate a path we want to return false. We will not be following the path.
+        if (!path.isPathable)
+            return false;
+
+        //If the path is longer than we're allowed to remove we want to return false. We wont be following the path.
+        if (path.Cost > movement)
+            return false;
+
+        return true;
+    }
+
+    private void UpdatePosition(Vector2Int targetPosition)
+    {
+        //Trigger observers to watch for this unit moving. OnMove should never be null.
+        OnMove(this.gameObject, Position, targetPosition);
+
+        //Update our recorded position.
+        Position = targetPosition;
+    }
 
 }

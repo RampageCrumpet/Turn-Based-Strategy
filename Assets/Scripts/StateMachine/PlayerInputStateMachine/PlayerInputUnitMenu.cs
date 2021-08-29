@@ -18,7 +18,7 @@ public class PlayerInputUnitMenu : BaseState
 
         player = owner.GetComponent<Player>();
         playerInputController = owner.GetComponent<PlayerInputController>();
-        unitMenu = playerInputController.unitMenu;
+        unitMenu = playerInputController.UnitMenu;
 
         //Hook the UnitMenu buttons up to functions
         unitMenu.InitializeStandardButtons(UnitMenuAttack, UnitMenuWait, UnitMenuCancel);
@@ -30,7 +30,7 @@ public class PlayerInputUnitMenu : BaseState
                 unitMenu.InitializeAbilityButton(ability, UnitMenuSpecial);
         }
 
-        playerInputController. unitMenu.ShowUnitMenu(Input.mousePosition, false);
+        playerInputController. UnitMenu.ShowUnitMenu(Input.mousePosition, false);
     }
 
     public override void UpdateState()

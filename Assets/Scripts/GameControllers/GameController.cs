@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Pathfinding;
+using Mirror;
 
 [RequireComponent(typeof(RangeFinder))]
 [RequireComponent(typeof(AStar))]
-public class GameController : MonoBehaviour
+[RequireComponent(typeof(GameBoard))]
+public class GameController : NetworkBehaviour
 {
     [field: SerializeField]
     public AStar pathfinder { get; protected set; }
@@ -14,13 +16,14 @@ public class GameController : MonoBehaviour
 
     public static GameController gameController { get; protected set; }
 
-    [field: SerializeField]
+
     public GameBoard gameBoard { get; protected set; }
-    [field: SerializeField]
+
     public RangeFinder rangeFinder { get; protected set; }
 
 
-
+    [field: SerializeField]
+    List<PlayerStartState> playerStartStates = new List<PlayerStartState>();
 
     List<Player> players = new List<Player>();
 
@@ -29,7 +32,7 @@ public class GameController : MonoBehaviour
     public Player ActivePlayer { get { return players[activePlayerIndex]; } private set { } }
     int activePlayerIndex = 0;
 
-    private void Start()
+    void Awake()
     {
         //Enforce the singleton pattern
         if (gameController != null)
@@ -42,9 +45,11 @@ public class GameController : MonoBehaviour
             gameController = this;
         }
 
-        pathfinder = this.gameObject.GetComponent<AStar>();
-        rangeFinder = this.gameObject.GetComponent<RangeFinder>();
+        pathfinder = this.GetComponent<AStar>();
+        rangeFinder = this.GetComponent<RangeFinder>();
+        gameBoard = GameObject.FindObjectOfType<GameBoard>();
     }
+
 
     public void AddUnitToGameBoard(Unit unit, Vector2Int position)
     {
@@ -60,9 +65,11 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Adding unit " + unit.name + " to the gameboard at " + position.ToString() + " has failed. Outside Bounds.");
+            throw new System.ArgumentOutOfRangeException("GameBoard does not contain the position " + position.ToString());
         }
     }
+
+
 
     public void EndTurn(Player player)
     { 
@@ -77,34 +84,20 @@ public class GameController : MonoBehaviour
         }
     }
 
-
-    /*public Unit GetUnitAt(Vector3Int position)
+    public PlayerStartState GetStartState()
     {
-        if (units.ContainsKey(position))
+        if(playerStartStates != null && playerStartStates.Count > 0)
         {
-            return units[position];
+            PlayerStartState startState = playerStartStates[0];
+            playerStartStates.Remove(startState);
+            return startState;
+        }
+        else
+        {
+            Debug.LogError("Player Start States is null or empty. Please ensure start states have been created.");
         }
 
         return null;
     }
-    
-    /// <summary>
-    /// Perform the record keeping for unit position. 
-    /// </summary>
-    public void UpdateUnitPosition(Vector3Int currrentPosition, Vector3Int newPosition, Unit unit)
-    {
-        units.Remove(currrentPosition);
-        units.Add(newPosition, unit);
-    }
 
-    public void RegisterUnit(Unit unit, Vector3Int position)
-    {
-        units.Add(position, unit);
-    }
-
-    public void UpdateUnitPosition(Unit unit, Vector3Int oldPosition, Vector3Int newPosition)
-    {
-        units.Remove(oldPosition);
-        units.Add(newPosition, unit);
-    }*/
 }

@@ -18,7 +18,7 @@ public class GameBoard : MonoBehaviour
     List<TileDefinition> tileDefs = new List<TileDefinition>();
 
 
-    private void Start()
+    void Awake()
     {
         Initialize();
         Unit.OnMove += MoveUnit;
@@ -119,18 +119,22 @@ public class GameBoard : MonoBehaviour
     }
 
     //This method moves the unit to it's new spot on the gameboard. 
-    private void MoveUnit(Unit unit, Vector2Int startPosition, Vector2Int targetPosition)
+    private void MoveUnit(GameObject unitObject, Vector2Int startPosition, Vector2Int targetPosition)
     {
-        if (!Contains(startPosition) || !Contains(targetPosition))
+        Unit unit = unitObject.GetComponent<Unit>();
+
+        if (!Contains(startPosition))
         {
-            Debug.LogError("Moving Unit to or from a position that is not on the game board.");
-            return;
+            throw new System.ArgumentOutOfRangeException("Gameboard does not contain position" + startPosition.ToString());
+        }
+
+        if (!Contains(targetPosition))
+        {
+            throw new System.ArgumentOutOfRangeException("Gameboard does not contain position" + targetPosition.ToString());
         }
 
         tiles[startPosition.x, startPosition.y].unit = null;
         tiles[targetPosition.x, targetPosition.y].unit = unit;
-
-        Debug.Log("Unit position updated.");
     }
 
     //Adds a property to the map.
@@ -144,8 +148,4 @@ public class GameBoard : MonoBehaviour
 
         tiles[location.x, location.y].installation = property;
     }
-
-
-
-
 }

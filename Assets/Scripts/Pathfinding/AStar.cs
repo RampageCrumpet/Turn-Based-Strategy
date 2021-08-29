@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System;
 
 namespace Pathfinding
 {
@@ -48,20 +49,31 @@ namespace Pathfinding
         Vector2Int targetPosition;
 
 
-        private void Start()
+        void Start()
         {
             gameBoard = GameController.gameController.gameBoard;
         }
 
         /// <summary>
-        /// Generates a path between two GameBoard positions and returns it. 
+        /// Generates a path between two GameBoard positions and returns it. Validates to check that the path can actually be followed.
         /// </summary>
         /// <param name="startPosition"></param>
         /// <param name="targetPosition"></param>
         /// <param name="movementType"></param>
         /// <returns></returns>
-        public Stack<Vector2Int> FindPath(Vector2Int startPosition, Vector2Int targetPosition, MovementType movementType)
+        public Path FindPath(Vector2Int startPosition, Vector2Int targetPosition, MovementType movementType, Player player = null)
         {
+            if(!gameBoard.Contains(startPosition) || !gameBoard.Contains(targetPosition))
+            {
+                throw new InvalidOperationException("The GameBoard does not contain " + startPosition.ToString());
+            }
+
+            if (!gameBoard.Contains(targetPosition))
+            {
+                throw new InvalidOperationException("The GameBoard does not contain " + targetPosition.ToString());
+            }
+
+
             openList = new HashSet<Node>();
             closedList = new HashSet<Node>();
             allNodes.Clear();
@@ -74,27 +86,24 @@ namespace Pathfinding
             currentNode = GetNode((Vector2Int)this.startPosition);
             openList.Add(currentNode);
 
+            IteratePath(movementType, player);
 
-            if(!gameBoard.Contains(startPosition) || !gameBoard.Contains(targetPosition))
-            {
-                Debug.LogWarning("The gameBoard does not contain the start or end position of the path.");
-                return null;
-            }
+            bool isPathable = true;
+            if (gameBoard.GetTile(targetPosition).unit != null)
+                isPathable = false;
 
-
-            CreatePath(movementType);
-
-            return path;
+            Path returnPath = new Path(path, movementType, this, isPathable, player);
+            return returnPath;
         }
 
         //Run each step of A*
-        private void CreatePath(MovementType movementType)
+        private void IteratePath(MovementType movementType, Player player)
         {
             while(openList.Count > 0 && path == null)
             {
                 List<Node> neighbors = FindNeighbors(currentNode.position, movementType);
                 
-                ExamineNeighbors(neighbors, currentNode, movementType);
+                ExamineNeighbors(neighbors, currentNode, movementType, player);
 
                 UpdateCurrentTile(currentNode);
 
@@ -143,42 +152,57 @@ namespace Pathfinding
             return neighbors;
         }
 
-        private void SetTileCost(Node parent, Node node, MovementType movementType)
+        private void SetTileCost(Node parent, Node node, MovementType movementType, Player player)
         {
             node.parent = parent;
 
-            if(GetTileCost(node.position, movementType) < 0)
+            if(GetTileCost(node.position, movementType, player) < 0)
             {
                 node.isWalkable = false;
             }
 
-            node.travelToCost = parent.travelToCost + GetTileCost(node.position, movementType);
+            node.travelToCost = parent.travelToCost + GetTileCost(node.position, movementType, player);
             node.heuristicCost = Mathf.Abs(node.position.x - targetPosition.x) + Mathf.Abs(node.position.y + targetPosition.y);
             node.estimatedTotalCost = node.travelToCost + node.heuristicCost;
         }
 
         //Gets the cost for moving across the tile. 
-        private int GetTileCost(Vector2Int target, MovementType movementType)
+        public int GetTileCost(Vector2Int target, MovementType movementType, Player player)
         {
             int tileCost = gameBoard.GetTile(target).getPathfindingCosts(movementType);
+
+            if(player != null)
+            {
+                //If the tile has a unit
+                if(gameBoard.GetTile(target).unit != null)
+                {
+                    //If the unit's owner is not the same as the player issuing the order.
+                    if (!player.Owns(gameBoard.GetTile(target).unit))
+                    {
+                        //The tile is not pathable
+                        tileCost = -1;
+                    }
+                }
+            }
+
             return tileCost;
         }
 
-        private void ExamineNeighbors(List<Node> neighbors, Node current, MovementType movementType)
+        private void ExamineNeighbors(List<Node> neighbors, Node current, MovementType movementType, Player player)
         {
             for (int x = 0; x < neighbors.Count; x++)
             {
                 if(openList.Contains(neighbors[x]))
                 {
-                    if(current.travelToCost + GetTileCost(neighbors[x].position, movementType) < neighbors[x].travelToCost)
+                    if(current.travelToCost + GetTileCost(neighbors[x].position, movementType, player) < neighbors[x].travelToCost)
                     {
-                        SetTileCost(current, neighbors[x], movementType);
+                        SetTileCost(current, neighbors[x], movementType, player);
                     }
                     
                 }
                 else if(!closedList.Contains(neighbors[x]))
                 {
-                    SetTileCost(current, neighbors[x], movementType);
+                    SetTileCost(current, neighbors[x], movementType, player);
 
                     //Using Negative 1 as a flag to see if a tile is walkable. If it's not we add it to the closed list. 
                     if(neighbors[x].isWalkable)
@@ -210,7 +234,6 @@ namespace Pathfinding
         {
             if(node.position == targetPosition)
             {
-                Debug.Log("Found the target Position");
                 Stack<Vector2Int> path = new Stack<Vector2Int>();
 
                 //Create the path by following the nodes back to the start.
@@ -220,29 +243,13 @@ namespace Pathfinding
                     node = node.parent;
                 }
 
-                Debug.Log("Found a path.");
-
                 return path;
             }
 
             return null;
         }
 
-        //Extract the cost to move through a path.
-        public int GetPathCost(Stack<Vector2Int> pathStack, MovementType movementType)
-        {
-            if (path == null)
-                return 0;
 
-            int pathCost = 0;
-
-            foreach (Vector2Int tilePosition in path)
-            {
-                pathCost += GetTileCost(tilePosition, movementType);
-            }
-
-            return pathCost;
-        }
 
     }
 

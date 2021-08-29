@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using ExtensionMethods;
 
 /// <summary>
 /// This class moves the cursor to follow the players mouse snapping the selection indicator to the tilemap.
@@ -16,7 +17,7 @@ public class CursorController : MonoBehaviour
 
     GameBoard gameBoard;
 
-    private void Start()
+    void Start()
     {
         gameBoard = GameController.gameController.gameBoard;
     }
@@ -26,18 +27,11 @@ public class CursorController : MonoBehaviour
     void Update()
     {
         //Snap the cursor indicator to the 
-        cursorIndicator.transform.position = gameBoard.CellToWorld(GetMouseCell());
+        Vector3 snappedWorldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition).GetGridsnapPosition();
+        snappedWorldMousePosition.z = -1;
+        cursorIndicator.transform.position = snappedWorldMousePosition;
+
     }
 
-    /// <summary>
-    /// Returns the TileMap cell directly underneath the mouse.
-    /// </summary>
-    /// <returns>Returns a Vector3Int containing the cell position directly under the mouse.</returns>
-    public Vector2Int GetMouseCell()
-    {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2Int cellPosition = gameBoard.WorldToCell(mousePos);
 
-        return cellPosition;
-    }
 }

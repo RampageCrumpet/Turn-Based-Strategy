@@ -52,7 +52,7 @@ public class PathFollower : MonoBehaviour
         }
     }
 
-    public void FollowPath(Stack<Vector2Int> path)
+    public void FollowPath(Path path)
     {
         if (path == null)
         {
@@ -60,8 +60,7 @@ public class PathFollower : MonoBehaviour
             return;
         }
             
-        this.path = path;
-        targetCell  = path.Pop();
-        Debug.Log("Path length: " + path.Count + '.');
+        this.path = path.nodes;
+        targetCell  = this.path.Pop();
     }
 }

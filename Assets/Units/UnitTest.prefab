@@ -110,13 +110,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa13d678f864294d866f8193dc3e1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: TestUnit
+  syncMode: 0
+  syncInterval: 0.1
+  <UnitName>k__BackingField: Unnamed Unit
   movement: 5
   vision: 1
   Armor: 0
   movementType: 0
   unitType: 1
-  <cost>k__BackingField: 100
+  <Cost>k__BackingField: 100
   unitWeapons:
   - {fileID: 11400000, guid: 824a6198f3ce0f5409be5777998925ea, type: 2}
   abilityFlags: 2147483647
