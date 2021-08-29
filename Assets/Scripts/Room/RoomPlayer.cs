@@ -53,7 +53,10 @@ public class RoomPlayer : NetworkRoomPlayer
     /// This is invoked on clients when the server has caused this object to be destroyed.
     /// <para>This can be used as a hook to invoke effects or do client specific cleanup.</para>
     /// </summary>
-    public override void OnStopClient() { }
+    public override void OnStopClient() 
+    {
+        readyStatusPanel.RemovePlayer(this);
+    }
 
     /// <summary>
     /// Called when the local player object has been set up.
@@ -107,7 +110,8 @@ public class RoomPlayer : NetworkRoomPlayer
     /// <param name="oldReadyState">The old readyState value</param>
     /// <param name="newReadyState">The new readyState value</param>
     public override void ReadyStateChanged(bool oldReadyState, bool newReadyState) 
-    { 
+    {
+        readyStatusPanel.ShowReadyStatus(this, newReadyState);
     }
 
     #endregion

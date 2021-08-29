@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class ReadyStatusPanel : MonoBehaviour
+public class ReadyStatusPanel : NetworkBehaviour
 {
     [SerializeField]
     [Tooltip("The players ReadyPanel to be instantiated whenevr a player joins.")]
@@ -11,11 +11,11 @@ public class ReadyStatusPanel : MonoBehaviour
 
     List<PlayerPanel> playerPanels = new List<PlayerPanel>();
 
-    
+    RoomManager roomManager;
 
-    private void Start()
+    private void Awake()
     {
-        RoomManager roomManager = FindObjectOfType<RoomManager>();
+        roomManager = FindObjectOfType<RoomManager>();
 
         if(roomManager == null)
         {
@@ -43,8 +43,6 @@ public class ReadyStatusPanel : MonoBehaviour
     /// <param name="player"></param>
     public void AddPlayer(RoomPlayer player)
     {
-        //LobbyPlayer player = playerConnection.identity.gameObject.GetComponent<LobbyPlayer>();
-
         foreach (PlayerPanel playerPanel in playerPanels)
         {
             if(playerPanel.OwningPlayer == null)
@@ -54,6 +52,8 @@ public class ReadyStatusPanel : MonoBehaviour
                 return;
             }
         }
+
+        Debug.LogError("No panel to display " + player.name + " ready status.");
     }
 
     public void RemovePlayer(RoomPlayer player)
@@ -64,7 +64,37 @@ public class ReadyStatusPanel : MonoBehaviour
             if(playerPanel.OwningPlayer == player)
             {
                 playerPanel.OwningPlayer = null;
+                return;
             }
         }
+    }
+
+    public void ToggleLocalReady()
+    {
+
+
+        RoomPlayer localPlayer = NetworkClient.localPlayer.gameObject.GetComponent<RoomPlayer>();
+
+        localPlayer.CmdChangeReadyState(!localPlayer.readyToBegin);
+        
+        /*if(localPlayer.readyToBegin)
+        {
+            localPlayer.
+        }*/
+    }
+
+
+    public void ShowReadyStatus(RoomPlayer changingPlayer, bool readyStatus)
+    {
+       
+        foreach (PlayerPanel playerPanel in playerPanels)
+        {
+            if (playerPanel.OwningPlayer == changingPlayer)
+            {
+                playerPanel.SetPlayerReady(readyStatus);
+                return; //No need to search anymore. 
+            }
+        }
+
     }
 }

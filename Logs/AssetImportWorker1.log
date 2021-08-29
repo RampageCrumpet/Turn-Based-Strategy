@@ -1,0 +1,127 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.16f1 (049d6eca3c44) revision 302446'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Education; OS build 19043.985; Version 2009; 64bit' Language: 'en' Physical Memory: 32698 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+H:\Tools\Unity\2020.3.16f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker1
+-projectPath
+C:/Users/Alex Van Oss/Documents/GitHub/CSC-Winter-2020/Turn Based Strategy
+-logFile
+Logs/AssetImportWorker1.log
+-srvPort
+52551
+Successfully changed project path to: C:/Users/Alex Van Oss/Documents/GitHub/CSC-Winter-2020/Turn Based Strategy
+C:/Users/Alex Van Oss/Documents/GitHub/CSC-Winter-2020/Turn Based Strategy
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 84.60 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.16f1 (049d6eca3c44)
+[Subsystems] Discovering subsystems at path H:/Tools/Unity/2020.3.16f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/Alex Van Oss/Documents/GitHub/CSC-Winter-2020/Turn Based Strategy/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 980 Ti (ID=0x17c8)
+    Vendor:   
+    VRAM:     6097 MB
+    Driver:   26.21.14.3107
+Initialize mono
+Mono path[0] = 'H:/Tools/Unity/2020.3.16f1/Editor/Data/Managed'
+Mono path[1] = 'H:/Tools/Unity/2020.3.16f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'H:/Tools/Unity/2020.3.16f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56524
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: H:/Tools/Unity/2020.3.16f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.000984 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 85.39 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in 16.236 seconds
+Domain Reload Profiling:
+	ReloadAssembly (16236ms)
+		BeginReloadAssembly (46ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (494ms)
+			LoadAssemblies (45ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (125ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (34ms)
+			SetupLoadedEditorAssemblies (273ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (85ms)
+				BeforeProcessingInitializeOnLoad (43ms)
+				ProcessInitializeOnLoadAttributes (111ms)
+				ProcessInitializeOnLoadMethodAttributes (30ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.003588 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\Alex Van Oss\Documents\GitHub\CSC-Winter-2020\Turn Based Strategy\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\Alex Van Oss\Documents\GitHub\CSC-Winter-2020\Turn Based Strategy\Library\PackageCache\com.unity.visualscripting@1.6.1\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.75 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Find all reader and writers took 149 milliseconds
+Script Module: UnityEngine.UI.dll
+Weave behaviours and messages took 132 milliseconds
+Find all reader and writers took 130 milliseconds
+Script Module: UnityEngine.TestRunner.dll
+Weave behaviours and messages took 57 milliseconds
+Find all reader and writers took 134 milliseconds
+Script Module: Unity.Mathematics.dll
+Weave behaviours and messages took 399 milliseconds
+Find all reader and writers took 120 milliseconds
+Script Module: SimpleWebTransport.dll
+Weave behaviours and messages took 13 milliseconds
+Find all reader and writers took 139 milliseconds
+Script Module: Unity.VisualScripting.State.dll
+Weave behaviours and messages took 11 milliseconds
+Find all reader and writers took 142 milliseconds
+Script Module: Unity.VisualScripting.Core.dll
+Weave behaviours and messages took 278 milliseconds
+Find all reader and writers took 132 milliseconds
+Script Module: Unity.VisualScripting.Flow.dll
+Weave behaviours and messages took 172 milliseconds
+Find all reader and writers took 160 milliseconds
+Script Module: Unity.TextMeshPro.dll
+Weave behaviours and messages took 172 milliseconds
+Find all reader and writers took 123 milliseconds
+Script Module: Unity.Timeline.dll
+Weave behaviours and messages took 58 milliseconds
+Find all reader and writers took 115 milliseconds
+Script Module: Telepathy.dll
+Weave behaviours and messages took 5 milliseconds
+Find all reader and writers took 132 milliseconds
+Script Module: Unity.2D.SpriteShape.Runtime.dll
+Weave behaviours and messages took 54 milliseconds
+Find all reader and writers took 131 milliseconds
+Script Module: Unity.2D.PixelPerfect.dll
+Weave behaviours and messages took 2 milliseconds
+Find all reader and writers took 123 milliseconds
+Script Module: kcp2k.dll
+Weave behaviours and messages took 11 milliseconds
+Find all reader and writers took 129 milliseconds
+Script Module: where-allocations.dll
+Weave behaviours and messages took 0 milliseconds
+Find all reader and writers took 124 milliseconds
+Script Module: Unity.2D.Common.Runtime.dll
+Weave behaviours and messages took 0 milliseconds
