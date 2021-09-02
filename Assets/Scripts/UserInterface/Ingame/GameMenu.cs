@@ -27,6 +27,8 @@ public class GameMenu : MonoBehaviour
 
     public void HideGameMenu()
     {
+        endTurnButton.onClick.RemoveAllListeners();
+        cancelButton.onClick.RemoveAllListeners();
         this.gameObject.SetActive(false);
     }
 

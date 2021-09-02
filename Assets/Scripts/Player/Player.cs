@@ -48,6 +48,12 @@ public class Player : NetworkBehaviour
             installation.CaptureInstallation(this);
             playerInstallations.Add(installation);
         }
+
+        //If we're the server we want to add them to our GameControllers list of players.
+        if(isServer)
+        {
+            GameController.gameController.AddPlayer(this);
+        }
     }
 
 
@@ -78,25 +84,37 @@ public class Player : NetworkBehaviour
     [Command]
     public void CmdIssueMoveOrder(Vector2Int position, GameObject unitObject)
     {
+        //If it's not this players turn don't issue the order.
+        if (!GameController.gameController.IsTurn(this))
+            return;
+
         unitObject.GetComponent<Unit>().ServerMove(position);
     }
 
     [Command]
     public void CmdIssueAttackOrder(Vector2Int position, GameObject unitObject)
     {
+        //If it's not this players turn don't issue the order.
+        if (!GameController.gameController.IsTurn(this))
+            return;
+
         unitObject.GetComponent<Unit>().ServerAttack(position);
     }
 
     [Command]
     public void CmdEndTurn()
     {
+        //If it's not this players turn don't try to end the turn.
+        if (!GameController.gameController.IsTurn(this))
+            return;
+
+        GameController.gameController.ServerEndTurn(this);
+
         //Allow each unit to move again next turn.
         foreach(Unit unit in playerUnits)
         {
             unit.ReadyUnit();
         }
-
-        GameController.gameController.EndTurn(this);
     }
 
 
@@ -122,8 +140,8 @@ public class Player : NetworkBehaviour
     }
 
 
-    [Command]
-    public void CmdUpdateCash()
+ 
+    public void UpdateCash()
     {
         foreach(Installation installation in playerInstallations)
         {
@@ -132,8 +150,8 @@ public class Player : NetworkBehaviour
 
     }
     
-    [Command]
-    public void CmdRemoveUnit(GameObject unitObject)
+ 
+    public void RemoveUnit(GameObject unitObject)
     {
         Unit unit = unitObject.GetComponent<Unit>();
         playerUnits.Remove(unit);
@@ -153,20 +171,138 @@ public class Player : NetworkBehaviour
     }
 
     [Command]
-    public void CmdPurchaseUnit(GameObject unitPrefabObject, Vector3 position)
+    public void CmdPurchaseUnit(String unitName, Vector3 position)
     {
-        Unit unitPrefab = unitPrefabObject.GetComponent<Unit>();
+        //If it's not this players turn don't execute the ability. 
+        if (!GameController.gameController.IsTurn(this))
+            return;
 
+        Unit unitPrefab = null;
+
+        foreach (Unit purchasableUnit in PlayerCommander.ConstructionPrefabs)
+        {
+            if(purchasableUnit.name == unitName)
+            {
+                unitPrefab = purchasableUnit;
+            }
+        }
+
+        if(unitPrefab == null)
+        {
+            Debug.LogError("No constructable unit with name " + unitName + " can be found.");
+            return;
+        }
+        
         //If we don't have enough money we're done.
         if (Money < unitPrefab.Cost)
             return;
 
         Money -= unitPrefab.Cost;
 
-        GameObject newUnitGameObject = Instantiate(unitPrefab.gameObject, position, unitPrefab.gameObject.transform.rotation);
-        NetworkServer.Spawn(newUnitGameObject);
-        Unit  newUnit = newUnitGameObject.GetComponent<Unit>();
-        newUnit.TakeOwnership(this);
-        playerUnits.Add(newUnit);
+
+        //Create the new unit and spawn it across the network.
+        Unit newUnit = Instantiate(unitPrefab.gameObject, position, unitPrefab.gameObject.transform.rotation).GetComponent<Unit>();
+        NetworkServer.Spawn(newUnit.gameObject);
+
+        if(isServerOnly)
+        {
+            playerUnits.Add(newUnit);
+            newUnit.TakeOwnership(this);
+        }
+
+        RpcAddNewUnit(newUnit.gameObject);
+    }
+
+    [ClientRpc]
+    public void RpcAddNewUnit(GameObject newUnitObject)
+    {
+        Unit unit = newUnitObject.GetComponent<Unit>();
+        unit.TakeOwnership(this);
+        playerUnits.Add(unit);
+    }
+
+    [Command]
+    public void CmdExecuteAbility(String abilityName, GameObject invokingUnitGameObject)
+    {
+        //If it's not this players turn don't execute the ability. 
+        if (!GameController.gameController.IsTurn(this))
+            return;
+
+        Ability ability = null;
+
+        if (invokingUnitGameObject == null)
+        {
+            Debug.LogError("Error: Executing ability on NULL unit..");
+            return;
+        }
+        Unit invokingUnit = invokingUnitGameObject.GetComponent<Unit>();
+
+        if (invokingUnit == null)
+        {
+            Debug.LogError("Error: Cannot find unit component on " + invokingUnitGameObject.name);
+            return;
+        }
+
+        foreach (Ability unitAbility in invokingUnit.abilities)
+        {
+            if(unitAbility.name == abilityName)
+            {
+                ability = unitAbility;
+            }
+        }
+        if (ability == null)
+        {
+            Debug.LogError("Error: Executing NULL ability.");
+            return;
+        }
+
+
+        if (!invokingUnit.abilities.Contains(ability))
+        {
+            Debug.LogError("Error: Executing unit" + SelectedUnit.name + " does not have " + ability.name);
+            return;
+        }
+
+        //If we're running a dedicated server we need to execute the ability locally.
+        if (isServerOnly && ability.CanExecute())
+            ability.Execute();
+
+
+        //Execute the ability on all of the connected clients.
+        RpcExecuteAbility(abilityName, invokingUnitGameObject);
+    }
+
+    [ClientRpc]
+    public void RpcExecuteAbility(String abilityName, GameObject invokingUnitGameObject)
+    {
+        Ability ability = null;
+
+        Unit invokingUnit = invokingUnitGameObject.GetComponent<Unit>();
+
+
+        foreach (Ability unitAbility in invokingUnit.abilities)
+        {
+            if (unitAbility.name == abilityName)
+            {
+                ability = unitAbility;
+            }
+        }
+
+
+
+        if (ability == null)
+        {
+            Debug.LogError(SelectedUnit.name + " is attempting to execute " + abilityName + " but unit doesn't have an ability with that name.");
+            return;
+        }
+
+        if(invokingUnit == null)
+        {
+            Debug.LogError("No selected unit to activate ability " + abilityName);
+        }
+
+        ability.Execute();
+
+        Debug.Log("Invoking: " + abilityName);
     }
 }

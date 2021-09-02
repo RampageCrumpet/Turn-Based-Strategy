@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class UnitMenu : MonoBehaviour
 {
+    public PlayerInputController playerInputController;
+
     RectTransform panel;
 
     [SerializeField]
@@ -20,7 +22,7 @@ public class UnitMenu : MonoBehaviour
 
     List<Button> abilityButtons = new List<Button>();
 
-
+   
     public void Start()
     {
         panel = this.GetComponent<RectTransform>();
@@ -65,11 +67,18 @@ public class UnitMenu : MonoBehaviour
 
         buttonObject.GetComponentInChildren<Text>().text = ability.name;
 
-        button.onClick.AddListener(ability.Execute);
-        button.onClick.AddListener(specialCallback);
+        button.onClick.AddListener(() => InvokeAbility(ability, playerInputController.LocalPlayer.SelectedUnit));
+
+        //button.onClick.AddListener(ability.Execute);
+        button.onClick.AddListener(specialCallback); //This callback tells the PlayerInputController to deselect our unit. We've used an ability and we're done.
         buttonObject.transform.SetParent(panel);
         abilityButtons.Add(button);
 
         buttonObject.SetActive(true);
+    }
+
+    void InvokeAbility(Ability ability, Unit invokingUnit)
+    {
+        playerInputController.IssueAbilityOrder(ability, invokingUnit);
     }
 }

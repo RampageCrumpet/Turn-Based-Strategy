@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 namespace ExtensionMethods
 {
     public static class Vector3Extensions
-     {
+    {
         public static Vector3 GetGridsnapPosition(this Vector3 unsnappedPosition)
         {
             GameBoard gameBoard = GameController.gameController.gameBoard;
@@ -18,4 +19,6 @@ namespace ExtensionMethods
             return snapPosition;
         }
     }
+
+
 }

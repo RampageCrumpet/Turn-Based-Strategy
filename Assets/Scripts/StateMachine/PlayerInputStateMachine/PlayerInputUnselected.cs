@@ -26,6 +26,12 @@ namespace PlayerInputStateMachine
         {
             base.UpdateState();
 
+            //If it's not our turn we don't want to do anything.
+            if (!GameController.gameController.IsTurn(player))
+            {
+                return;
+            }
+
             Vector2Int tilePosition = GameController.gameController.gameBoard.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
             //Select the unit under the tile

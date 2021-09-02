@@ -23,12 +23,21 @@ public class Capture : Ability
 
     public override bool CanExecute()
     {
-        if(gameBoard.GetTile(owner.Position).installation != null)
+        GameTile targetTile = gameBoard.GetTile(owner.Position);
+
+        //There is no installation to capture.
+        if (targetTile.installation == null)
         {
-            return true;
+            return false;
         }
 
-        return false;
+        //If the same player that owns the unit owns the installation they cannot capture it.
+        if (owner.Player.Owns(targetTile.installation))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public override void Execute()

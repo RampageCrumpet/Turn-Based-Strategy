@@ -9,7 +9,7 @@ using Mirror;
 public class PlayerInputController : NetworkBehaviour
 {
     //Control scripts
-    Player player;
+    public Player LocalPlayer { get; private set; }
     GameBoard gameBoard;
 
 
@@ -38,10 +38,10 @@ public class PlayerInputController : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = this.GetComponent<Player>();
+        LocalPlayer = this.GetComponent<Player>();
         gameBoard = GameController.gameController.gameBoard;
 
-        if (!player.hasAuthority)
+        if (!LocalPlayer.hasAuthority)
         {
             return;
         }
@@ -57,12 +57,22 @@ public class PlayerInputController : NetworkBehaviour
 
     public void IssueMoveOrder(Vector2Int position)
     {
-        player.CmdIssueMoveOrder(position, player.SelectedUnit.gameObject);
+        LocalPlayer.CmdIssueMoveOrder(position, LocalPlayer.SelectedUnit.gameObject);
     }
 
     public void IssueAttackOrder(Vector2Int position)
     {
-        player.CmdIssueAttackOrder(position, player.SelectedUnit.gameObject);
+        LocalPlayer.CmdIssueAttackOrder(position, LocalPlayer.SelectedUnit.gameObject);
+    }
+
+    public void IssueAbilityOrder(Ability ability, Unit invokingUnit)
+    {
+        LocalPlayer.CmdExecuteAbility(ability.name, invokingUnit.gameObject);
+    }
+
+    public void IssueEndTurnCommand()
+    {
+        LocalPlayer.CmdEndTurn();
     }
 }
 

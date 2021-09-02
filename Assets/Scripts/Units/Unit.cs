@@ -75,6 +75,7 @@ public class Unit : NetworkBehaviour
 
 
     //A flag used to see if a unit has exhausted itself yet.
+    [field: SyncVar]
     public bool CanMove { get; private set;} = true;
 
 
@@ -109,6 +110,13 @@ public class Unit : NetworkBehaviour
     [Server]
     public void ServerMove(Vector2Int targetPosition)
     {
+        //If we can't move we're done already.
+        if (!CanMove)
+            return;
+
+        //The unit is moving so update the fact that it's moved
+        CanMove = false;
+
         //We need to update the position of the unit on server only setups.
         if(isServerOnly)
             UpdatePosition(targetPosition);

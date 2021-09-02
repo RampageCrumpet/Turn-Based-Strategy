@@ -25,12 +25,18 @@ public class GameController : NetworkBehaviour
     [field: SerializeField]
     List<PlayerStartState> playerStartStates = new List<PlayerStartState>();
 
-    List<Player> players = new List<Player>();
+    SyncList<Player> players = new SyncList<Player>();
 
+
+    [field: SyncVar]
     public int DayCount { get; private set; } = 0;
 
-    public Player ActivePlayer { get { return players[activePlayerIndex]; } private set { } }
+    public Player ActivePlayer { get { return players[activePlayerIndex]; }}
+
+    [SyncVar]
     int activePlayerIndex = 0;
+
+    bool HasBeenInitialized { get { return players.Count >= 0; } }
 
     void Awake()
     {
@@ -69,12 +75,13 @@ public class GameController : NetworkBehaviour
         }
     }
 
-
-
-    public void EndTurn(Player player)
-    { 
-        if(player == players[activePlayerIndex])
+    [Server]
+    public void ServerEndTurn(Player player)
+    {
+        //If the player telling us they've ended their turn is the active player.
+        if (player == players[activePlayerIndex])
         {
+            //Go to the next active player.
             activePlayerIndex++;
             if (activePlayerIndex >= players.Count)
             {
@@ -82,6 +89,16 @@ public class GameController : NetworkBehaviour
                 DayCount++;
             }
         }
+    }
+
+    public bool IsTurn(Player player)
+    {
+        if (ActivePlayer != player)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public PlayerStartState GetStartState()
@@ -98,6 +115,12 @@ public class GameController : NetworkBehaviour
         }
 
         return null;
+    }
+
+    [Server]
+    public void AddPlayer(Player player)
+    {
+        players.Add(player);
     }
 
 }

@@ -2482,9 +2482,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1569777390502449966, guid: 78ee040b244424f468631689fec0ea65, type: 3}
+      propertyPath: minPlayers
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569777390502449966, guid: 78ee040b244424f468631689fec0ea65, type: 3}
       propertyPath: maxConnections
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1569777390502449966, guid: 78ee040b244424f468631689fec0ea65, type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569777390502449966, guid: 78ee040b244424f468631689fec0ea65, type: 3}
+      propertyPath: spawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 6773278649280267121, guid: accdf4810eb35f142aa74c8eccfcb6cd, type: 3}
     - target: {fileID: 3105020077218703137, guid: 78ee040b244424f468631689fec0ea65, type: 3}
       propertyPath: m_RootOrder
       value: 3

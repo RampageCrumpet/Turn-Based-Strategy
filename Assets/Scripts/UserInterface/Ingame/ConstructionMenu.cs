@@ -38,19 +38,15 @@ public class ConstructionMenu : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
-    public void InitializeConstructionButton(UnityAction<GameObject, Vector3> constructionCallback,UnityAction stateMachineCallback, Unit unit, Vector3 constructionPosition)
+    public void InitializeConstructionButton(UnityAction<string, Vector3> constructionCallback,UnityAction stateMachineCallback, Unit unit, Vector3 constructionPosition)
     {
-
-        
         GameObject buttonObject = ObjectPooler.objectPooler.GetPooledObject("ConstructionButton");
         ConstructionButton constButton = buttonObject.GetComponent<ConstructionButton>();
-
-        Debug.Log(buttonObject.name);
 
         constButton.UnitName = unit.name;
         constButton.Cost = unit.Cost.ToString();
 
-        constButton.button.onClick.AddListener(() => constructionCallback(unit.gameObject, constructionPosition));
+        constButton.button.onClick.AddListener(() => constructionCallback(unit.gameObject.name, constructionPosition));
         constButton.button.onClick.AddListener(stateMachineCallback);
         buttonObject.transform.SetParent(panel);
         constructionButtons.Add(constButton);

@@ -19,6 +19,7 @@ public class PlayerInputUnitMenu : BaseState
         player = owner.GetComponent<Player>();
         playerInputController = owner.GetComponent<PlayerInputController>();
         unitMenu = playerInputController.UnitMenu;
+        unitMenu.playerInputController = playerInputController;
 
         //Hook the UnitMenu buttons up to functions
         unitMenu.InitializeStandardButtons(UnitMenuAttack, UnitMenuWait, UnitMenuCancel);
@@ -35,6 +36,14 @@ public class PlayerInputUnitMenu : BaseState
 
     public override void UpdateState()
     {
+        //If it's not our turn we don't want to do anything.
+        if (!GameController.gameController.IsTurn(player))
+        {
+            owner.ChangeState(new PlayerInputUnselected());
+            return;
+        }
+            
+
         base.UpdateState();
 
         if (Input.GetMouseButtonDown(1))

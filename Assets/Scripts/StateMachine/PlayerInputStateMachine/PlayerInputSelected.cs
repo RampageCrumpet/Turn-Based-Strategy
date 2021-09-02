@@ -36,6 +36,14 @@ namespace PlayerInputStateMachine
         {
             base.UpdateState();
 
+            //If it's not our turn we don't want to do anything.
+            if (!GameController.gameController.IsTurn(playerInputController.LocalPlayer))
+            {
+                owner.ChangeState(new PlayerInputUnselected());
+                return;
+            }
+
+
             Vector2Int tilePosition = GameController.gameController.gameBoard.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
             //Deselect our unit if we rightclick.
@@ -66,6 +74,13 @@ namespace PlayerInputStateMachine
                 }
                 else //We clicked on a unit.
                 {
+                    //We clicked on ourselves and don't want to attack. Instead we want to open the UnitMenu.
+                    if(selectedUnit == gameBoard.GetTile(tilePosition).unit)
+                    {
+                        owner.ChangeState(new PlayerInputMoved());
+                        return;
+                    }
+
                     //If we have no weapon deselect our unit.
                     if(selectedUnit.unitWeapons == null)
                     {
@@ -106,7 +121,11 @@ namespace PlayerInputStateMachine
         }
 
         private void CreateMovementIndicators()
-        {       
+        {
+            //Don't create any movement indicators if we can't move
+            if (!selectedUnit.CanMove)
+                return;
+
             List<Vector2Int> movementLocations = rangeFinder.GetTilesWithinRange(selectedUnit.Position,
             0, selectedUnit.movement, selectedUnit.movementType).ToList();
 
@@ -201,5 +220,4 @@ namespace PlayerInputStateMachine
             return cheapestNeighborPosition;
         }
     }
-
 }

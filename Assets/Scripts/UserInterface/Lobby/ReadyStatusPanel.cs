@@ -71,16 +71,9 @@ public class ReadyStatusPanel : NetworkBehaviour
 
     public void ToggleLocalReady()
     {
-
-
         RoomPlayer localPlayer = NetworkClient.localPlayer.gameObject.GetComponent<RoomPlayer>();
 
         localPlayer.CmdChangeReadyState(!localPlayer.readyToBegin);
-        
-        /*if(localPlayer.readyToBegin)
-        {
-            localPlayer.
-        }*/
     }
 
 
@@ -95,6 +88,5 @@ public class ReadyStatusPanel : NetworkBehaviour
                 return; //No need to search anymore. 
             }
         }
-
     }
 }

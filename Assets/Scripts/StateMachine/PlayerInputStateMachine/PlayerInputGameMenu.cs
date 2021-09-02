@@ -15,7 +15,7 @@ namespace PlayerInputStateMachine
             inputController = owner.GetComponent<PlayerInputController>();
 
             //Register our destroy state with the buttons.
-            inputController.GameMenu.InitializeButtons(CloseMenu, CloseMenu);
+            inputController.GameMenu.InitializeButtons(EndTurn, CloseMenu);
         }
 
         public override void UpdateState()
@@ -31,6 +31,12 @@ namespace PlayerInputStateMachine
 
         public void CloseMenu()
         {
+            owner.ChangeState(new PlayerInputUnselected());
+        }
+
+        public void EndTurn()
+        {
+            inputController.IssueEndTurnCommand();
             owner.ChangeState(new PlayerInputUnselected());
         }
     }

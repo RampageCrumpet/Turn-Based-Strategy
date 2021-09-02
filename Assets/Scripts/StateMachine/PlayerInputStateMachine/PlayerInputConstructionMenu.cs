@@ -36,6 +36,14 @@ namespace PlayerInputStateMachine
         {
             base.UpdateState();
 
+            //If it's not our turn we don't want to do anything.
+            if (!GameController.gameController.IsTurn(playerInputController.LocalPlayer))
+            {
+                owner.ChangeState(new PlayerInputUnselected());
+                return;
+            }
+
+
             if (Input.GetMouseButtonDown(1))
                 ChangeState();
         }
